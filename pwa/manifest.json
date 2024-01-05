@@ -1,0 +1,15 @@
+{
+  "name": "SP Blog",
+  "short_name": "SP Blog",
+  "description": "A blog about my research",
+  "icons": [{
+    "src": "icons/sp_logo_512.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#fff",
+  "theme_color": "#000",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait"
+}

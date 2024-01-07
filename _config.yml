@@ -1,9 +1,9 @@
 # Site settings
 title: SP Blog
 SEOTitle: SP Blog
-header-img: img/home-sp-hd-2.jpg
+header-img: img/home-sp-hd.jpg
 email: pradhan.shrijal@gmail.com
-description: "Blog about my Work, Projects and Travels."
+description: "Blog about my Work and Projects"
 keyword: "Shrijal, SP Blog, Robotics, Perception"
 url: "https://pradhanshrijal.github.io"          # your host, for absolute URL
 baseurl: ""      # for example, '/blog' if your blog hosted on 'host/blog'
@@ -20,7 +20,7 @@ sidebar-avatar: /img/sp-formal.jpg      # use absolute URL, seeing it's used in 
 RSS: false
 github_username:    pradhanshrijal
 linkedin_username:   pradhanshrijal
-
+xing_username:    Shrijal_Pradhan
 
 
 

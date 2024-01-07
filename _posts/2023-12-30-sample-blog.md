@@ -6,6 +6,7 @@ date:       2023-12-30
 author:     Shrijal Pradhan
 header-img: img/post-maspalomas.jpg
 catalog: true
+categories: blog
 tags:
     - sample
 ---

@@ -6,6 +6,7 @@ date:       2024-01-04
 author:     Shrijal Pradhan
 ext-img: "https://miro.medium.com/v2/resize:fit:1001/1*ZB574gbdvY0YzIr1x83YTg.png"
 catalog: true
+categories: blog
 tags:
     - pha
     - docker

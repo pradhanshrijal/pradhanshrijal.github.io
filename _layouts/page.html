@@ -193,6 +193,16 @@ layout: default
                                 </a>
                             </li>
                             {% endif %}
+                            {% if site.xing_username %}
+                            <li>
+                                <a target="_blank" href="https://www.xing.com/profile/{{ site.xing_username }}">
+                                    <span class="fa-stack fa-lg">
+                                        <i class="fa fa-circle fa-stack-2x"></i>
+                                        <i class="fa fa-xing fa-stack-1x fa-inverse"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            {% endif %}
                         </ul>
                         {% if site.email %}
                             <p><a href="mailto:{{site.email}}">✉️ {{site.email}}</a></p>

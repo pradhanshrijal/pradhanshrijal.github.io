@@ -1,21 +1,63 @@
 ---
 layout: page
-title: "About"
-description: "An introduction to my academic and professional self"
+title_excl: "The PHA Project"
+description: "Modular Setup of a Large Scale Simulation Test Environment for Automated Driving"
 header-img: "img/post-bg-rwd.jpg"
+permalink: /pha-project/
 ---
 
-<!-- English Version -->
-<div class="en post-container">
-    <blockquote><p>Always Learning.</p></blockquote>
-
-    <p>Hi, I am <strong>Shrijal Pradhan</strong>. I am currently a researcher at DLR System Engineering for Future Mobility. 
-        My area of research is Perception, specifically world model estimaton.</p>
-    <p>Before this I worked in a robotics startup where my main area of focus was on Object Detection and Tracking 
-        by using Sensor Fusion. Being in a small company, there were other tasks with which I expanded my horizons 
-        in the area of mobile robotics and automated driving.</p>
-
-</div>
+<!-- Introduction to the PHA Project -->
+<h1>Introduction</h1>
+<p>When I started working after my Master Studies, I had the opportunity to work in an environment with 
+    very motivated individuals; developing a complete robotics stack which would later expand into
+    an automated driving stack. While being a part of this project, although I specialized in a particular field,
+    I wanted to learn about the entire stack on a general level. For this purpose, I devised a general plan to test
+    the available stacks in a simulator. The key word would be similarity.
+</p>
+<p>In the Nepal Bhasha, the language of the Newar people from the Kathmandu Valley, Pha means pig (as there is no word for
+    wild boar). This name was chosen because when I devised the idea back in 2021, I told my self "I will achieve this when
+    pigs will fly!".
+</p>
+<hr>
+<h1>Goals</h1>
+<p>The goal of this project is to combine my work that exapands into different organisations. The idea is to create an envrionment
+    for the easy setup of an autonomous drivind stack. The environment should be modular enough to allow ease in switching any
+    of the individual modules within the stack. The concept would be tested in simulation, namingly in Carla which would itself be
+    a module within the stack. The driving stack in question would be Autoware Auto.
+</p>
+<hr>
+<h1>Articles</h1>
+<br>
+<!-- Articles with the Tag PHA -->
+{% for tag in site.tags %}
+	<div class="one-tag-list">
+		<!-- span class="fa fa-tag listing-seperator" id="{{ tag[0] }}">
+            <span class="tag-text">{{ tag[0] }}</span>
+        </span -->
+        {% if tag[0] == "pha" %}
+		{% for post in tag[1] %}
+			<!-- <li class="listing-item">
+			<time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+			<a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+			</li> -->
+			<div class="post-preview">
+                <a href="{{ post.url | prepend: site.baseurl }}">
+                    <h2 class="post-title">
+                        {{ post.title }}
+                    </h2>
+                    {% if post.subtitle %}
+                    <h3 class="post-subtitle">
+                        {{ post.subtitle }}
+                    </h3>
+                    {% endif %}
+                </a>
+			    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+		    </div>
+		    <hr>
+		{% endfor %}
+        {% endif %}
+	</div>
+{% endfor %}
 
 <!-- Handle Language Change -->
 <script type="text/javascript">

@@ -9,6 +9,7 @@ catalog: true
 categories: blog
 tags:
     - sample
+    - pha
 ---
 
 ## Money Money

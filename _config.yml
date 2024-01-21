@@ -1,7 +1,7 @@
 # Site settings
 title: SP Blog
 SEOTitle: SP Blog
-header-img: img/home-sp-hd.jpg
+header-img: img/home-sp-hd-2.jpg
 email: pradhan.shrijal@gmail.com
 description: "Blog about my Work and Projects"
 keyword: "Shrijal, SP Blog, Robotics, Perception"
@@ -102,10 +102,6 @@ projects: [
 
 # References
 references: [
-    {
-        title: "CowCow",
-        href: "http://cowcowabenteuer.github.io"
-    },
     {
         title: "DLR-SE",
         href: "https://www.dlr.de/se/"

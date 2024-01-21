@@ -129,6 +129,11 @@
     display: none;
   }
 }
+.img-with-text figcaption {
+  text-align: center;
+  font-size: 10px;
+  font-style: italic
+}
 body {
   /* Hux learn from
      *     TypeIsBeautiful,

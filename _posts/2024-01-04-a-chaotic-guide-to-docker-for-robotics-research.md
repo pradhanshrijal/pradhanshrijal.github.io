@@ -30,7 +30,7 @@ So let's build from the ground up. Here are the specifications for the base Oper
 
 This is the bare minimum requirement to get started with the mentioned docker setup. Other than these requirements, everything else can be installed and re-installed (inside the docker container of course). The choice of the operating system as Ubuntu 22.04 was made for the longevitiy of the system. Additionally, it is important for modern robotics projects to be supported with GPU computations. To this end, we will enable Docker to use the GPU via NVIDIA GPU Drivers. The blog post from Roboflow regarding [Using GPU in Docker][Using GPU in Docker] explains the topic in a simple way. The [NVIDIA Container Toolkit][NVIDIA Container Toolkit] allows users to build and run GPU accelerated containers. The toolkit includes a container runtime library and utilities to automatically configure containers to leverage NVIDIA GPUs.
 
-```console
+```bash
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
@@ -56,14 +56,14 @@ As these are a set of instructions that cannot be narrowed down to a simple scri
 
 Check if the NVIDIA Driver are installed.
 
-```console
+```bash
 nvidia-smi
 ```
 If the drivers are installed then this command would produce no errors and would show details regarding the GPU device(s) available. 
 
 > Only follow the instructions below if the nvidia drivers are not installed. Improperly setting up the NVIDIA Drivers may cause the system not boot up.
 
-```console
+```bash
 sudo apt install nvidia-driver-525 -y
 ```
 
@@ -73,7 +73,7 @@ As this is an Open Source project, we will use only docker engine, which is free
 
 Based on [Install Docker Engine][Install Docker Engine]:
 
-```console
+```bash
 # Add Docker's official GPG key:
 sudo apt-get update
 sudo apt-get install ca-certificates curl -y
@@ -93,7 +93,7 @@ sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin 
 
 Once Docker Engine is installed, we need to setup priviliges to run Docker without `root` as documented in [Docker post-install].
 
-```console
+```bash
 sudo groupadd docker
 sudo usermod -aG docker $USER
 ```
@@ -104,7 +104,7 @@ The user must then log out and back in for the settings to take effect.
 
 Now that we have installed Docker, we will configure the compatibility of Docker with NVIDIA Drivers. We do this with [NVIDIA Container Toolkit][Install NVIDIA Container Toolkit] which replaces [nvidia-docker][nvidia-docker]. The toolkit allows users to build and run GPU-accelerated containers. The article [Using GPU in Docker][Using GPU in Docker] goes into more depth in the matter.
 
-```console
+```bash
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
     sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
@@ -131,7 +131,7 @@ The remainder of the article would then focus on this concept and explain in det
 
 Let's start with a sample usage of the concept, and then we can break it down piece by piece. For this purpose, we 
 
-```console
+```bash
 ```
 
 ## Advantages
@@ -174,7 +174,7 @@ These are ideas that not in the current plan (atleast within the [PHA Project]) 
 [Install Docker Engine]: https://docs.docker.com/engine/install/ubuntu/
 [Docker post-install]: https://docs.docker.com/engine/install/linux-postinstall/ 
 [Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/
-[Install NVIDIA Container Toolkit]: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
+[Install NVIDIA Container Toolkit]: 
 [nvidia-docker]: https://github.com/NVIDIA/nvidia-docker
 [rocker]: https://github.com/osrf/rocker
 [NVIDIA Container Toolkit]: https://github.com/NVIDIA/nvidia-container-toolkit

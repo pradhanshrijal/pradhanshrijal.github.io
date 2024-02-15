@@ -7,6 +7,7 @@ author:     Shrijal Pradhan
 ext-img: "https://www.shutterstock.com/image-vector/whale-container-computer-docker-developer-600nw-2038221926.jpg"
 catalog: true
 categories: blog
+permalink: /easy-guide-to-installing-docker/
 tags:
     - pha
     - docker

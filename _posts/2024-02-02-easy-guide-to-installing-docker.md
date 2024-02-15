@@ -22,7 +22,7 @@ So let's build from the ground up. Here are the specifications for the base Oper
 - Docker version 24.0.7
 - NVIDIA Docker 2.13.0
 
-This is the bare minimum requirement to get started with the mentioned docker setup. Other than these requirements, everything else can be installed and re-installed (inside the docker container of course). The choice of the operating system as Ubuntu 22.04 was made for the longevitiy of the system. Additionally, it is important for modern robotics projects to be supported with GPU computations. To this end, we will enable Docker to use the GPU via NVIDIA GPU Drivers. The blog post from Roboflow regarding [Using GPU in Docker][Using GPU in Docker] explains the topic in a simple way. The [NVIDIA Container Toolkit][NVIDIA Container Toolkit] allows users to build and run GPU accelerated containers. The toolkit includes a container runtime library and utilities to automatically configure containers to leverage NVIDIA GPUs.
+This is the bare minimum requirement to get started with the mentioned docker setup. The choice of the operating system as Ubuntu 22.04 was made for the longevitiy of the system. Additionally, it is important for modern robotics projects to be supported with GPU computations. To this end, we will enable Docker to use the GPU via NVIDIA GPU Drivers. The blog post from Roboflow regarding [Using GPU in Docker][Using GPU in Docker] explains the topic in a simple way. The [NVIDIA Container Toolkit][NVIDIA Container Toolkit] allows users to build and run GPU accelerated containers. The toolkit includes a container runtime library and utilities to automatically configure containers to leverage NVIDIA GPUs.
 
 > The Version of Docker and NVIDIA Docker should note that relevant, it is advised to use the latest available vesion.
 
@@ -53,7 +53,7 @@ sudo apt install nvidia-driver-525 -y
 
 ## Installing Docker
 
-As this is an Open Source project, we will use only docker engine, which is free. Read the [Docker overview][Docker overview] to tingle the knowledge taste buds. 
+As this is an Open Source project, we will use only docker engine, which is free. Read the [Docker Overview][Docker Overview] to tingle the knowledge taste buds. 
 
 Based on [Install Docker Engine][Install Docker Engine]:
 
@@ -75,7 +75,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y
 ```
 
-Once Docker Engine is installed, we need to setup priviliges to run Docker without `root` as documented in [Docker post-install].
+Once Docker Engine is installed, we need to setup priviliges to run Docker without `root` as documented in [Docker Post-Install].
 
 ```bash
 sudo groupadd docker
@@ -86,7 +86,7 @@ The user must then log out and back in for the settings to take effect.
 
 ## Installing NVIDIA Docker
 
-Now that we have installed Docker, we will configure the compatibility of Docker with NVIDIA Drivers. We do this with [NVIDIA Container Toolkit][Install NVIDIA Container Toolkit] which replaces [nvidia-docker][nvidia-docker]. The toolkit allows users to build and run GPU-accelerated containers. The article [Using GPU in Docker][Using GPU in Docker] goes into more depth in the matter.
+Now that we have installed Docker, we will configure the compatibility of Docker with NVIDIA Drivers. We do this with [NVIDIA Container Toolkit][Install NVIDIA Container Toolkit] which replaces [Nvidia-Docker][Nvidia-Docker]. The toolkit allows users to build and run GPU-accelerated containers. The article [Using GPU in Docker][Using GPU in Docker] goes into more depth in the matter.
 
 ```bash
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
@@ -103,7 +103,7 @@ sudo apt-get install -y nvidia-container-toolkit
     <figcaption>NVIDIA Container Toolkit (<a href="https://blog.roboflow.com/use-the-gpu-in-docker/">Citation</a>)</figcaption>
 </figure>
 
-Once these installations are completed, we can start with docker containers. Everything else required for the project can be installed within the containers.
+Once these installations are completed, we can start with docker containers. With the acception of sensor and ROS drivers; everything else required for the project can be installed within the containers.
 
 ## Short Introduction to Docker (Bonus)
 
@@ -159,29 +159,29 @@ This guide should give you a solid foundation to start using Docker for your dev
 
 ## References
 
-- [NVIDIA Drivers] - https://www.lenovo.com/us/en/glossary/nvidia-drivers/
-- [Docker overview] - https://docs.docker.com/get-started/overview/
-- [Install Docker Engine] - https://docs.docker.com/engine/install/ubuntu/
-- [Docker post-install] - https://docs.docker.com/engine/install/linux-postinstall/ 
-- [Using GPU in Docker] - https://blog.roboflow.com/use-the-gpu-in-docker/
-- [Install NVIDIA Container Toolkit] - https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-- [nvidia-docker] - https://github.com/NVIDIA/nvidia-docker
-- [rocker] - https://github.com/osrf/rocker
-- [NVIDIA Container Toolkit] - https://github.com/NVIDIA/nvidia-container-toolkit
-- [Create a bootable USB stick] - https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview
-- [Dual Boot] - https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/
-- [WSL2] - https://learn.microsoft.com/en-us/windows/wsl/about
-- [ChatGPT] - https://chat.openai.com/
+- [NVIDIA Drivers]
+- [Docker Overview]
+- [Install Docker Engine]
+- [Docker Post-Install] 
+- [Using GPU in Docker]
+- [Install NVIDIA Container Toolkit]
+- [Nvidia-Docker]
+- [Rocker]
+- [NVIDIA Container Toolkit]
+- [Create a bootable USB stick]
+- [Dual Boot]
+- [WSL2]
+- [ChatGPT]
 
 [PHA Project]: {{site.url}}/pha-project/
 [NVIDIA Drivers]: https://www.lenovo.com/us/en/glossary/nvidia-drivers/
-[Docker overview]: https://docs.docker.com/get-started/overview/
+[Docker Overview]: https://docs.docker.com/get-started/overview/
 [Install Docker Engine]: https://docs.docker.com/engine/install/ubuntu/
-[Docker post-install]: https://docs.docker.com/engine/install/linux-postinstall/ 
+[Docker Post-Install]: https://docs.docker.com/engine/install/linux-postinstall/ 
 [Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/
 [Install NVIDIA Container Toolkit]: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-[nvidia-docker]: https://github.com/NVIDIA/nvidia-docker
-[rocker]: https://github.com/osrf/rocker
+[Nvidia-Docker]: https://github.com/NVIDIA/nvidia-docker
+[Rocker]: https://github.com/osrf/rocker
 [NVIDIA Container Toolkit]: https://github.com/NVIDIA/nvidia-container-toolkit
 [Create a bootable USB stick]: https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview
 [Dual Boot]: https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/

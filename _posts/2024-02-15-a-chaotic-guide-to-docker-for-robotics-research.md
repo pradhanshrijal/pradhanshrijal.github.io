@@ -2,9 +2,9 @@
 layout:     post
 title:      A Chaotic Guide to Docker for Robotics Research
 subtitle:   A quick and messy guide to docker on overdrive
-date:       2024-02-04
+date:       2024-02-15
 author:     Shrijal Pradhan
-ext-img: "https://res.cloudinary.com/practicaldev/image/fetch/s--o0XQ5sCf--/c_imagga_scale,f_auto,fl_progressive,h_900,q_auto,w_1600/https://raw.githubusercontent.com/Pwd9000-ML/blog-devto/main/posts/2022/GitHub-Docker-Runner-Azure-Part2/assets/main.png"
+ext-img: "https://oneclick-cloud.com/wp-content/uploads/2023/08/Bigstock_-139961875-Docker-Emblem.-A-Blue-Whale-With-Several-Containers.-e1574090673987-1.jpg"
 catalog: true
 categories: blog
 tags:
@@ -50,36 +50,14 @@ These are ideas that not in the current plan (atleast within the [PHA Project]) 
 
 ## References
 
-- [Docker ROS Guide] - https://roboticseabass.com/2021/04/21/docker-and-ros/
-- [Docker ROS 2 Guide] - https://roboticseabass.com/2023/07/09/updated-guide-docker-and-ros2/
-- [Ubuntu White Paper] - https://ubuntu.com/engage/dockerandros
-- [NVIDIA Drivers] - https://www.lenovo.com/us/en/glossary/nvidia-drivers/
-- [Docker overview] - https://docs.docker.com/get-started/overview/
-- [Install Docker Engine] - https://docs.docker.com/engine/install/ubuntu/
-- [Docker post-install] - https://docs.docker.com/engine/install/linux-postinstall/ 
-- [Using GPU in Docker] - https://blog.roboflow.com/use-the-gpu-in-docker/
-- [Install NVIDIA Container Toolkit] - https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-- [nvidia-docker] - https://github.com/NVIDIA/nvidia-docker
-- [rocker] - https://github.com/osrf/rocker
-- [NVIDIA Container Toolkit] - https://github.com/NVIDIA/nvidia-container-toolkit
-- [Create a bootable USB stick] - https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview
-- [Dual Boot] - https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/
-- [WSL2] - https://learn.microsoft.com/en-us/windows/wsl/about
+- [Docker ROS Guide]
+- [Docker ROS 2 Guide]
+- [Ubuntu White Paper]
+- [Using GPU in Docker]
 
 [Docker ROS Guide]: https://roboticseabass.com/2021/04/21/docker-and-ros/
 [Docker ROS 2 Guide]: https://roboticseabass.com/2023/07/09/updated-guide-docker-and-ros2/
 [Ubuntu White Paper]: https://ubuntu.com/engage/dockerandros
 [PHA Project]: {{site.url}}/pha-project/
 [Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
-[NVIDIA Drivers]: https://www.lenovo.com/us/en/glossary/nvidia-drivers/
-[Docker overview]: https://docs.docker.com/get-started/overview/
-[Install Docker Engine]: https://docs.docker.com/engine/install/ubuntu/
-[Docker post-install]: https://docs.docker.com/engine/install/linux-postinstall/ 
 [Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/
-[Install NVIDIA Container Toolkit]: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html
-[nvidia-docker]: https://github.com/NVIDIA/nvidia-docker
-[rocker]: https://github.com/osrf/rocker
-[NVIDIA Container Toolkit]: https://github.com/NVIDIA/nvidia-container-toolkit
-[Create a bootable USB stick]: https://ubuntu.com/tutorials/create-a-usb-stick-on-ubuntu#1-overview
-[Dual Boot]: https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/
-[WSL2]: https://learn.microsoft.com/en-us/windows/wsl/about

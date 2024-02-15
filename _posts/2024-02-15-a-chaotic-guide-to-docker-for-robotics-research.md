@@ -7,7 +7,7 @@ author:     Shrijal Pradhan
 ext-img: "https://oneclick-cloud.com/wp-content/uploads/2023/08/Bigstock_-139961875-Docker-Emblem.-A-Blue-Whale-With-Several-Containers.-e1574090673987-1.jpg"
 catalog: true
 categories: blog
-permalink: a-chaotic-guide-to-docker-for-robotics-research/
+permalink: /:categories/a-chaotic-guide-to-docker-for-robotics-research/
 tags:
     - pha
     - docker

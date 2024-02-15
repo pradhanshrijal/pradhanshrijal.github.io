@@ -7,7 +7,7 @@ author:     Shrijal Pradhan
 header-img: img/post-maspalomas.jpg
 catalog: true
 categories: blog
-permalink: /sample-blog/
+permalink: sample-blog/
 tags:
     - sample
     - pha

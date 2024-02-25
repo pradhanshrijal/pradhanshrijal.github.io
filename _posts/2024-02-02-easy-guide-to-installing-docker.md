@@ -25,6 +25,7 @@ So let's build from the ground up. Here are the specifications for the base Oper
 
 This is the bare minimum requirement to get started with the mentioned docker setup. The choice of the operating system as Ubuntu 22.04 was made for the longevitiy of the system. Additionally, it is important for modern robotics projects to be supported with GPU computations. To this end, we will enable Docker to use the GPU via NVIDIA GPU Drivers. The blog post from Roboflow regarding [Using GPU in Docker][Using GPU in Docker] explains the topic in a simple way. The [NVIDIA Container Toolkit][NVIDIA Container Toolkit] allows users to build and run GPU accelerated containers. The toolkit includes a container runtime library and utilities to automatically configure containers to leverage NVIDIA GPUs.
 
+> **_NOTE:_**
 > The Version of Docker and NVIDIA Docker should note that relevant, it is advised to use the latest available vesion.
 
 ## Installing Ubuntu
@@ -33,10 +34,12 @@ The two main concepts in installing Ubuntu is to [Create a bootable USB stick][C
 
 As these are a set of instructions that cannot be narrowed down to a simple script (atleast for now), please refer to the referenced links.
 
+> **_NOTE:_**
 > It should also be possible to install Ubuntu directly in Windows via [Windows Subsystem for Linux][WSL2] and use docker directly inside it bit this scope will not be explored in this article.
 
 ## Installing NVIDIA Driver
 
+> **_NOTE:_**
 > A NVIDIA driver is a software program that enables communication between your computer and the NVIDIA graphics processor installed in your system. It is used to ensure that your hardware works as intended with the latest software, games and applications. (*[Citation][NVIDIA Drivers]*)
 
 Check if the NVIDIA Driver are installed.
@@ -46,6 +49,7 @@ nvidia-smi
 ```
 If the drivers are installed then this command would produce no errors and would show details regarding the GPU device(s) available. 
 
+> **_WARN:_**
 > Only follow the instructions below if the nvidia drivers are not installed. Improperly setting up the NVIDIA Drivers may cause the system not boot up.
 
 ```bash
@@ -105,6 +109,10 @@ sudo apt-get install -y nvidia-container-toolkit
 </figure>
 
 Once these installations are completed, we can start with docker containers. With the acception of sensor and ROS drivers; everything else required for the project can be installed within the containers.
+
+## Conclusion
+
+This guideline is part of the [PHA Project]. The next article set's up a docker image for a robotics project [[Chaotic Docker]].
 
 ## Short Introduction to Docker (Bonus)
 
@@ -175,6 +183,7 @@ This guide should give you a solid foundation to start using Docker for your dev
 - [ChatGPT]
 
 [PHA Project]: {{site.url}}/pha-project/
+[Chaotic Docker]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-docker-for-robotics-research/
 [NVIDIA Drivers]: https://www.lenovo.com/us/en/glossary/nvidia-drivers/
 [Docker Overview]: https://docs.docker.com/get-started/overview/
 [Install Docker Engine]: https://docs.docker.com/engine/install/ubuntu/

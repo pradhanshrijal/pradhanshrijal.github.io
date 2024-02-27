@@ -40,37 +40,52 @@ Let's start with a sample usage of the concept, and then we can break it down pi
 
 The command to run this image as a container is:
 ```bash
+xhost +local:docker
 docker run \ 
--d \
---name pha-22-mini \
--e DISPLAY=$DISPLAY \
---env=NVIDIA_VISIBLE_DEVICES=all \
---env=NVIDIA_DRIVER_CAPABILITIES=all  \
---env=QT_X11_NO_MITSHM=1 \
---runtime=nvidia \
---privileged \
---shm-size=16gb \
---network host \
--v /tmp/.X11-unix:/tmp/.X11-unix \
--v /home/${USER}/schreibtisch/pha_docker_files/docker_share:/home/pha/docker_share \
--v /media/${USER}:/media/pha \
--v /dev:/dev \
---gpus all \
--it phaenvs/pha-22-mini \
-/bin/bash
+    -d \
+    --name pha-22-mini \
+    -e DISPLAY=$DISPLAY \
+    --env=NVIDIA_VISIBLE_DEVICES=all \
+    --env=NVIDIA_DRIVER_CAPABILITIES=all  \
+    --env=QT_X11_NO_MITSHM=1 \
+    --runtime=nvidia \
+    --privileged \
+    --shm-size=16gb \
+    --network host \
+    -v /tmp/.X11-unix:/tmp/.X11-unix \
+    -v /home/${USER}/schreibtisch/pha_docker_files/docker_share:/home/pha/docker_share \
+    -v /media/${USER}:/media/pha \
+    -v /dev:/dev \
+    --gpus all \
+    -it phaenvs/pha-22-mini \
+    /bin/bash
 ```
 
 #### Description
 
+`xhost` is used to allow a docker container to share the screen.
+
 See [Docker run] for a full list of instructions.
 
-**docker run**
-
-The docker run command runs a command in a new container, pulling the image if needed and starting the container.
-
-**-d**
-
-Run container in background and print container ID
+| Option &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; | Description |
+| `docker run` | The docker run command runs a command in a new container, pulling the image if needed and starting the container |
+| `-d, --detach` | Run container in background and print container ID |
+| `--name` | Assign a name to the container |
+| `-e, --env` | Set environment variables |
+| | `DISPLAY=$DISPLAY` Pass the Display of the base OS to docker |
+| | `NVIDIA_VISIBLE_DEVICES=all` All GPUs will be accessible, this is the default value in base CUDA container images |
+| | `NVIDIA_DRIVER_CAPABILITIES=all` Enable all available driver capabilities |
+| | `QT_X11_NO_MITSHM=1` Allow QT applications to use the screen |
+| `--runtime` | Runtime to use for this container |
+| | `nvidia` register a new runtime during the creation of the container to expose NVIDIA GPUs |
+| `--privileged` | Give extended privileges to this container |
+| `--shm-size` | Size of /dev/shm |
+| `--network` | Connect a container to a network |
+|  | `host` Pass host network to docker container, also useful for swarm service |
+| `-v, --volume` | Bind mount a volume |
+| `--gpus` | GPU devices to add to the container ('all' to pass all GPUs) |
+| `-i, --interactive` | Keep STDIN open even if not attached |
+| `-t, --tty` | Allocate a pseudo-TTY |
 
 ## Advantages
 
@@ -88,6 +103,10 @@ This article creates a base platform for the [PHA Project] where different modul
 - [Ubuntu White Paper]
 - [PHA 22 Mini]
 - [Using GPU in Docker]
+- [Container GUI]
+- [Docker GUI]
+- [Specialized Docker]
+- [Container Runtime]
 
 [Docker ROS Guide]: https://roboticseabass.com/2021/04/21/docker-and-ros/
 [Docker ROS 2 Guide]: https://roboticseabass.com/2023/07/09/updated-guide-docker-and-ros2/
@@ -97,3 +116,7 @@ This article creates a base platform for the [PHA Project] where different modul
 [PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
 [Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
 [Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/
+[Container GUI]: https://leimao.github.io/blog/Docker-Container-GUI-Display/
+[Docker GUI]: https://linuxmeerkat.wordpress.com/2014/10/17/running-a-gui-application-in-a-docker-container/
+[Specialized Docker]: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/docker-specialized.html
+[Container Runtime]: https://developer.nvidia.com/container-runtime

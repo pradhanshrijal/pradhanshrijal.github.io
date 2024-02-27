@@ -10,7 +10,6 @@ categories: blog
 permalink: /:categories/sample-blog/
 tags:
     - sample
-    - pha
 ---
 
 ## Money Money

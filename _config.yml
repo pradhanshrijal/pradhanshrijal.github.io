@@ -2,6 +2,7 @@
 title: SP Blog
 SEOTitle: SP Blog
 header-img: img/home-sp-hd-2.jpg
+color-grad: 0.8
 email: pradhan.shrijal@gmail.com
 description: "Blog about my Work and Projects"
 keyword: "Shrijal, SP Blog, Robotics, Perception"
@@ -14,15 +15,11 @@ sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "Currently working on Perception and Simulation."
 sidebar-avatar: /img/sp-formal.jpg      # use absolute URL, seeing it's used in both `/` and `/about/`
 
-
-
 # SNS settings
 RSS: false
 github_username:    pradhanshrijal
 linkedin_username:   pradhanshrijal
 xing_username:    Shrijal_Pradhan
-
-
 
 # Build settings
 # from 2016, 'pygments' is unsupported on GitHub Pages. Use 'rouge' for highlighting instead.
@@ -32,14 +29,9 @@ paginate: 10
 exclude: ["less","node_modules","Gruntfile.js","package.json","README.md"]
 anchorjs: true                          # if you want to customize anchor. check out line:181 of `post.html`
 
-
-
 # Gems
 # from PR#40, to support local preview for Jekyll 3.0
 gems: [jekyll-paginate]
-
-
-
 
 # Markdown settings
 # replace redcarpet to kramdown,
@@ -49,8 +41,6 @@ markdown: kramdown
 highlighter: rouge
 kramdown:
   input: GFM                            # use Github Flavored Markdown !important
-
-
 
 # 评论系统
 # Disqus（https://disqus.com/）
@@ -66,7 +56,6 @@ gitalk:
   admin: pradhanshrijal
   distractionFreeMode: true #是否启用类似FB的阴影遮罩
 
-
 # 统计
 
 # Analytics settings
@@ -77,15 +66,9 @@ gitalk:
 #ga_track_id: 'UA-90855596-1'            # Format: UA-xxxxxx-xx
 #ga_domain: qiubaiying.top               # 默认的是 auto, 这里我是自定义了的域名，你如果没有自己的域名，需要改成auto
 
-
-
-
-
 # Featured Tags
 featured-tags: true                     # 是否使用首页标签
 featured-condition-size: 1              # 相同标签数量大于这个数，才会出现在首页
-
-
 
 # Progressive Web Apps
 chrome-tab-theme-color: "#000000"

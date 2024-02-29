@@ -5,6 +5,7 @@ subtitle:   TL;DR copy paste the code ;)
 date:       2024-02-02
 author:     Shrijal Pradhan
 header-img: "img/pha-easy-docker.png"
+color-grad: 0.75
 catalog: true
 categories: blog
 permalink: /:categories/easy-guide-to-installing-docker/

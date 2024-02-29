@@ -10,7 +10,7 @@ layout: default
 <style type="text/css">
     header.intro-header{
         position: relative;
-        background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('{% if page.ext-img %}{{ page.ext-img }}{% else %}{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}{% endif %}')
+        background-image: linear-gradient(rgba(0, 0, 0, {% if page.color-grad %}{{ page.color-grad }}{% else %}{{ site.color-grad }}{% endif %}), rgba(0, 0, 0, {% if page.color-grad %}{{ page.color-grad }}{% else %}{{ site.color-grad }}{% endif %})), url('{% if page.ext-img %}{{ page.ext-img }}{% else %}{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}{% endif %}')
     }
 
     {% if page.header-mask %}

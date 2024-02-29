@@ -4,7 +4,7 @@ title:      Easy Guide to Installing Docker
 subtitle:   TL;DR copy paste the code ;)
 date:       2024-02-02
 author:     Shrijal Pradhan
-ext-img: "https://www.shutterstock.com/image-vector/whale-container-computer-docker-developer-600nw-2038221926.jpg"
+header-img: "img/pha-easy-docker.png"
 catalog: true
 categories: blog
 permalink: /:categories/easy-guide-to-installing-docker/

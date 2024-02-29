@@ -87,6 +87,8 @@ See [Docker run] for a full list of instructions.
 | `-i, --interactive` | Keep STDIN open even if not attached |
 | `-t, --tty` | Allocate a pseudo-TTY |
 
+
+
 ## Advantages
 
 ## Disadvantages

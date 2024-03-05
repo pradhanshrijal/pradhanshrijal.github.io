@@ -8,7 +8,7 @@ header-img: "img/pha-easy-docker.png"
 color-grad: 0.75
 catalog: true
 categories: blog
-permalink: /:categories/easy-guide-to-installing-docker/
+permalink: /:categories/:title/
 tags:
     - pha
     - docker
@@ -41,7 +41,7 @@ As these are a set of instructions that cannot be narrowed down to a simple scri
 ## Installing NVIDIA Driver
 
 > **_NOTE:_**
-> A NVIDIA driver is a software program that enables communication between your computer and the NVIDIA graphics processor installed in your system. It is used to ensure that your hardware works as intended with the latest software, games and applications. (*[Citation][NVIDIA Drivers]*)
+> A NVIDIA driver is a software program that enables communication between your computer and the NVIDIA graphics processor installed in your system. It is used to ensure that your hardware works as intended with the latest software, games and applications (*[Citation][NVIDIA Drivers]*).
 
 Check if the NVIDIA Driver are installed.
 
@@ -96,24 +96,24 @@ Now that we have installed Docker, we will configure the compatibility of Docker
 
 ```bash
 curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | sudo gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
-  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
-    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
-    sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
+   && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+   sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+   sudo tee /etc/apt/sources.list.d/nvidia-container-toolkit.list
 
 sudo apt-get update
 sudo apt-get install -y nvidia-container-toolkit
 ```
 
 <figure class="img-with-text">
-    <img src="https://blog.roboflow.com/content/images/2020/05/image-39.png" />
-    <figcaption>NVIDIA Container Toolkit (<a href="https://blog.roboflow.com/use-the-gpu-in-docker/">Citation</a>)</figcaption>
+   <img src="https://blog.roboflow.com/content/images/2020/05/image-39.png" />
+   <figcaption>NVIDIA Container Toolkit (<a href="https://blog.roboflow.com/use-the-gpu-in-docker/">Citation</a>)</figcaption>
 </figure>
 
 Once these installations are completed, we can start with docker containers. With the acception of sensor and ROS drivers; everything else required for the project can be installed within the containers.
 
 ## Conclusion
 
-This guideline is part of the [PHA Project]. The next article set's up a docker image for a robotics project [[Chaotic Docker]].
+This guideline is part of the [PHA Project]. The next article explains how to use a container for a robotics project [[Chaotic Docker - Part I]].
 
 ## Short Introduction to Docker (Bonus)
 
@@ -161,9 +161,9 @@ Here's a short guide to Docker (*Powered by [ChatGPT][ChatGPT]*):
    - Use `.dockerignore` files to exclude unnecessary files and directories from your Docker images.
 
 10. **Learning Resources**:
-    - Docker Documentation: https://docs.docker.com/
-    - Docker Official Images: https://hub.docker.com/
-    - Dockerfile Best Practices: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
+   - Docker Documentation: https://docs.docker.com/
+   - Docker Official Images: https://hub.docker.com/
+   - Dockerfile Best Practices: https://docs.docker.com/develop/develop-images/dockerfile_best-practices/
 
 This guide should give you a solid foundation to start using Docker for your development and deployment needs. Dive deeper into Docker's documentation and community resources for more advanced topics and best practices.
 
@@ -184,7 +184,7 @@ This guide should give you a solid foundation to start using Docker for your dev
 - [ChatGPT]
 
 [PHA Project]: {{site.url}}/pha-project/
-[Chaotic Docker]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-docker-for-robotics-research/
+[Chaotic Docker - Part I]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/
 [NVIDIA Drivers]: https://www.lenovo.com/us/en/glossary/nvidia-drivers/
 [Docker Overview]: https://docs.docker.com/get-started/overview/
 [Install Docker Engine]: https://docs.docker.com/engine/install/ubuntu/

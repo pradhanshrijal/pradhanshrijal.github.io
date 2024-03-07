@@ -88,9 +88,5 @@ references: [
     {
         title: "DLR-SE",
         href: "https://www.dlr.de/se/"
-    },
-    {
-        title: "Hux Blog",
-        href: "https://github.com/Huxpro/huxpro.github.io"
     }
 ]

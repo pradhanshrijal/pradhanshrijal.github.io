@@ -98,7 +98,9 @@ Now that we have a short introduction to the commands used, let's break it down 
 
 #### Simple Container Run
 
-`docker run phaenvs/pha-22-mini`
+```bash
+docker run phaenvs/pha-22-mini
+```
 
 This command follows the principle:
 
@@ -111,7 +113,9 @@ This would start a container based on the `phaenvs/pha-22-mini` image. However, 
 
 In the previous example the created container would get a random name assigned to it, to assign a specific name, we can use the `--name` option.
 
-`docker run --name pha-22-mini phaenvs/pha-22-mini`
+```bash
+docker run --name pha-22-mini phaenvs/pha-22-mini
+```
 
 Remember:
 - This container name needs to be unique among all running containers.
@@ -121,23 +125,31 @@ Remember:
 
 For the example that we have been running till now the container would generally terminate when it is exited. Another example of it would be to run the container for a single instance with `--rm` option, which automatically removes the container when it exits.
 
-`docker run --name pha-22-mini --rm phaenvs/pha-22-mini`
+```bash
+docker run --name pha-22-mini --rm phaenvs/pha-22-mini
+```
 
 But this is not what we want, we want the container to be running on the background and to stay dormant when exited or stopped. For this purpose we will use `-d` option to detach it and `-it` to keep STDIN one even if the container is not attached and allocate a pseudo-terminal to interract with the application inside the container.
 
-`docker run -d --name pha-22-mini -it phaenvs/pha-22-mini`
+```bash
+docker run -d --name pha-22-mini -it phaenvs/pha-22-mini
+```
 
 #### Command
 
 We can send a command that is executed when the docker container starts. As we are running a detached container, what we will do is send the command `/bin/bash` so that our pseudo-TTY with start a bash shell. It is possible to replace this with a particular command that can be run on the container (but we will not do that here).
 
-`docker run -d --name pha-22-mini -it phaenvs/pha-22-mini /bin/bash`
+```bash
+docker run -d --name pha-22-mini -it phaenvs/pha-22-mini /bin/bash
+```
 
 #### Sharing the Network
 
 What we will do now is to share the host network with docker. This allows ROS 2 to communicate with several containers. Further, any applications running in the local ip can be shared with the container clusters. This can be done with `--network host`.
 
-`docker run -d --name pha-22-mini --network host -it phaenvs/pha-22-mini /bin/bash`
+```bash
+docker run -d --name pha-22-mini --network host -it phaenvs/pha-22-mini /bin/bash
+```
 
 A safer alternative to this might be to create a dedicated docker network, see [Docker network] for instructions. The applied method allows the docker container to be accessed remotely as well, during development it can be a key positive as the system (or the robot) can be accessed from anywhere.
 
@@ -413,19 +425,25 @@ With this method we are running docker in the background, now we will look at so
 
 #### Entering Docker
 
-`docker exec -it pha-22-mini /bin/bash`
+```bash
+docker exec -it pha-22-mini /bin/bash
+```
 
 #### Stopping Docker
 
 Don't forget to exit the container if you are inside of it.
 
-`docker stop pha-22-mini`
+```bash
+docker stop pha-22-mini
+```
 
 #### Start Docker
 
 Once you have initialized the container with `docker run` you don't have to run the command over and over again, We are storing it for future use:
 
-`docker start pha-22-mini`
+```bash
+docker start pha-22-mini
+```
 
 ## Conclusion
 

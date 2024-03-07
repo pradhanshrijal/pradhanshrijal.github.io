@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      A Chaotic Guide to Using Docker for Robotics Research - Part III
-subtitle:   Comments and Alternatives
+subtitle:   Comments and Docker Compose
 date:       2024-02-29
 author:     Shrijal Pradhan
 ext-img: "https://oneclick-cloud.com/wp-content/uploads/2023/08/Bigstock_-139961875-Docker-Emblem.-A-Blue-Whale-With-Several-Containers.-e1574090673987-1.jpg"
@@ -15,70 +15,74 @@ tags:
     - ros
 ---
 
-## Alternatives to Priviliges
-- `/dev` files can be individually assigned an ID and sent to docker
-- No comment on RVIZ
+## Introduction
 
-## White Paper Criticism
-- No proper alternative given
-- Kinda rejected by the community
-- Why not create non-sudo (and sudo) users in docker with their own passwords?
-- The white paper does not provide proper counter arguments
-- Not enough references or extensive examples of what they consider breaches
+This article is the conclusion to the Chaotic Docker Series, which creates a basis for the PHA Project. Further, it provides an easy way for applying the PHA way for people who do not want to spend a few days to understand Docker and want to directly use it.
 
 ## Advantages
-- Different research institues have different installation methods
-- Different projects have different demands
-- Credentials do not have to be passed to docker
-- Very flexible development platform
+
+The goal of Single Source of Information ([SSI]) is to provide a platform where different software packages can be used modularly in their dockerized forms for different systems. This means that it is a very flexible development platform that would be robust to changes that come during any development process. Another advantage of the SSI is that since this space is shared between the host and the container, no credentials have to be passed to the container. Any changes to the softwares can be made from the host system.
 
 ## Disadvantages
-- Opened Access
+
+The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest question about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure.
+
+## Alternative
+
+One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA ROS ML]. They provide several different versions of ROS Docker and also provide several functions for installations. However, the author would argue (and of course the author tries to sell their idea), that with the SSI these installations could be easily applied to the container. This means that there are no issues with permissions when pulling or pushing with git, but again this project gives a lot of permissions to the containers. Further, if any source installations are made on the SSI, then this does not associate to the size of the container. Further, if we install with one container, we can also use the software for a container created with the same image. But PHA would not be a consuptions project without look at alternatives without thinking about integrating them, this could be an idea for the future.
+
+## TL;DR Docker Compose
+
+This section would be short and sweet. If anyone wants more information, see [Docker Compose]. Just remember:
+
+| **Command**| **Definition** |
+| `up` | Initialize and start the docker container |
+| `down` | Stop and remove the docker container |
+| `start` | Onyl start an available docker container  |
+| `stop` | Only stop a docker container |
+
+If you have not created the folder structure as explained in [Space for the SSI], setup the folder structure before we create the container:
+
+```bash
+xhost +local:docker
+cd /home/${USER}
+mkdir schreibtisch
+cd schreibtisch
+git clone https://github.com/pradhanshrijal/pha_docker_files
+```
+
+Sample up:
+
+```bash
+docker-compose -f envs/pha-22-mini/docker-compose.yaml up -d
+```
+
+Sample down:
+
+```bash
+docker-compose -f envs/pha-22-mini/docker-compose.yaml down
+```
+
+For `start` and `stop` it's the same as down.
 
 ## Conclusion
 
-This article creates a base platform for the [PHA Project] where different modules of the automated driving stack could be build upon.
+This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be built upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
 
 ## References
 
-- [Docker ROS Guide]
-- [Docker ROS 2 Guide]
-- [Docker run]
-- [Ubuntu White Paper]
 - [PHA 22 Mini]
 - [PHA Docker]
-- [Using GPU in Docker]
-- [Container GUI]
-- [Docker GUI]
-- [X11 Forwarding]
-- [ROS Docker GUI]
-- [Specialized Docker]
-- [Container Runtime]
 - [Gemini]
-- [Why GPUs]
-- [CuDNN]
-- [Realsense SDK Guide]
-- [Shared Memory]
+- [Docker Compose]
 
-[Docker ROS Guide]: https://roboticseabass.com/2021/04/21/docker-and-ros/
-[Docker ROS 2 Guide]: https://roboticseabass.com/2023/07/09/updated-guide-docker-and-ros2/
-[Docker run]: https://docs.docker.com/reference/cli/docker/container/run/
-[Docker network]: https://docs.docker.com/reference/cli/docker/network/
-[Ubuntu White Paper]: https://ubuntu.com/engage/dockerandros
 [PHA Project]: {{site.url}}/pha-project/
 [PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
 [PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files 
 [Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
-[Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/
-[Container GUI]: https://leimao.github.io/blog/Docker-Container-GUI-Display/
-[Docker GUI]: https://linuxmeerkat.wordpress.com/2014/10/17/running-a-gui-application-in-a-docker-container/
-[X11 Forwarding]: https://forums.docker.com/t/x11-forwarding-with-v-on-docker-run-not-working/17708
-[ROS Docker GUI]: https://wiki.ros.org/docker/Tutorials/GUI
-[Specialized Docker]: https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/docker-specialized.html
-[Container Runtime]: https://developer.nvidia.com/container-runtime
+[SSI]: {{site.url}}/blog/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#single-source-of-information
+[Space for the SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#finally-space-for-the-ssi
 [Gemini]: https://gemini.google.com/
-[Why GPUs]: https://blogs.nvidia.com/blog/why-gpus-are-great-for-ai/
-[CuDNN]: https://developer.nvidia.com/cudnn
-[CUDA Gitlab]: https://gitlab.com/nvidia/container-images/cuda
-[Realsense SDK Guide]: https://dev.intelrealsense.com/docs/compiling-librealsense-for-linux-ubuntu-guide
-[Shared Memory]: https://www.cyberciti.biz/tips/what-is-devshm-and-its-practical-usage.html
+[IKA ROS ML]: https://github.com/ika-rwth-aachen/docker-ros-ml-images
+[IKA ROS]: https://github.com/ika-rwth-aachen/docker-ros
+[Docker Compose]: https://docs.docker.com/compose/

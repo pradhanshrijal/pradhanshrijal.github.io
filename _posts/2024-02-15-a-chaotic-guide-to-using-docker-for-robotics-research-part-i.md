@@ -24,15 +24,15 @@ This article series delves into a new approach to using Docker. An approach that
 > **_NOTE:_**
 > Install Docker with [Easy Guide to Installing Docker].
 
-## TL;DR
-
-If you just want to use docker, ROS and the [PHA Project] in the simplex way possible goto [TLDR; Docker Compose] for a quick usage of Docker.
-
 ## Single Source of Information
 
 The main idea of this article is to create a Single Source of Information (SSI) for all the parameters and specifications for a robotics project. This idea helps to make sure that all the parameters required to setup a robot are referenced from and can be changed via a single file. This helps to maintain the complexity of a large robotics projects with several sub-modules. Further, these specifications generally includes weights and models that might not be be feasible to be used within a docker container. To this end, the single source of information must be place within a shared space between the docker and the main operating system. Such a space also is not allocated to the total usage space of docker when works at an advantage when the same weights have to be used in two container instances (say when comparing some changes to a module).
 
 The remainder of the article would then focus on this concept and explain in detail each component that would allow docker to be used in such a manner.
+
+## TL;DR
+
+If you just want to use docker, ROS and the [PHA Project] in the simplest way possible goto [TLDR; Docker Compose] for a quick usage of Docker.
 
 ## Sample Container Usage
 
@@ -335,7 +335,7 @@ The [SSI](#single-source-of-information) is simple another folder mapped to the 
 
 For this purpose we have to organise this folder in a particular manner so that all the containers know exactly where to find it. We can do this with the [PHA Docker]. The simplest explanation is that this is a space for all the automated scripts and parameter files relevant for the project.
 
-All you have to do is make sure the `USER` variable is defined in the system ().
+All you have to do is make sure the `USER` variable is defined in the system.
 
 ```bash
 echo $USER

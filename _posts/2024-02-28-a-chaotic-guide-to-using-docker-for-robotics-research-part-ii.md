@@ -292,7 +292,7 @@ cd schreibtisch
 git clone https://github.com/pradhanshrijal/pha_docker_files
 ```
 
-Now we can create a docker image
+Now we can create a docker image.
 
 ```bash
 cd /home/${USER}/schreibtisch/pha_docker_files

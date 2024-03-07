@@ -17,23 +17,23 @@ tags:
 
 ## Introduction
 
-This article is the conclusion to the Chaotic Docker Series, that creates a basis for the PHA Project. Further, it provides an easy way for applying the PHA way for people who do not want to spend a few days to understand Docker and want to directly use it.
+This article is the conclusion to the Chaotic Docker Series, which creates a basis for the PHA Project. Further, it provides an easy way for applying the PHA way for people who do not want to spend a few days to understand Docker and want to directly use it.
 
 ## Advantages
 
-The goal of Single Source of Information ([SSI]) is to provide a platform where different software packages can be used modularly in their dockerized forms for different systems. This means that it is a very flexible development platform that would be robust to changes that come during any development process. Another advantage of the SSI is that as this space is shared between the host and the container, no credentials have to be passed to the container. Any changes to the softwares can be made from the host system.
+The goal of Single Source of Information ([SSI]) is to provide a platform where different software packages can be used modularly in their dockerized forms for different systems. This means that it is a very flexible development platform that would be robust to changes that come during any development process. Another advantage of the SSI is that since this space is shared between the host and the container, no credentials have to be passed to the container. Any changes to the softwares can be made from the host system.
 
 ## Disadvantages
 
-The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest question about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development. It is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure.
+The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest question about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure.
 
 ## Alternative
 
-One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA ROS ML]. They provide several different version and functions and further also provide several functions for installations. However, the author would argue (and of course the author tries to sell their idea), that with the SSI these installations could be easily applied to the container. This means that there are no issues with permissions when pulling or pushing with git, but again this project gives a lot of permissions to the containers. Further, if any source installations are made on the SSI, then this does not associate to the size of the container. Further further, if we install with one container, we can also use the software for a container created with the same image. But PHA would not be a consuptions project without look at alternatives without thinking about integrating them, this could be an idea for the future.
+One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA ROS ML]. They provide several different versions of ROS Docker and also provide several functions for installations. However, the author would argue (and of course the author tries to sell their idea), that with the SSI these installations could be easily applied to the container. This means that there are no issues with permissions when pulling or pushing with git, but again this project gives a lot of permissions to the containers. Further, if any source installations are made on the SSI, then this does not associate to the size of the container. Further, if we install with one container, we can also use the software for a container created with the same image. But PHA would not be a consuptions project without look at alternatives without thinking about integrating them, this could be an idea for the future.
 
 ## TL;DR Docker Compose
 
-This section would be short and sweet, if anyone wants more information see [Docker Compose]. Just remember:
+This section would be short and sweet. If anyone wants more information, see [Docker Compose]. Just remember:
 
 | **Command**| **Definition** |
 | `up` | Initialize and start the docker container |
@@ -67,7 +67,7 @@ For `start` and `stop` it's the same as down.
 
 ## Conclusion
 
-This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be build upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
+This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be built upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
 
 ## References
 

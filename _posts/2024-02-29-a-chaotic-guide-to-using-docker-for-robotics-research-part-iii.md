@@ -25,21 +25,27 @@ The goal of Single Source of Information ([SSI]) is to provide a platform where 
 
 ## Disadvantages
 
-The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest question about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure.
+The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest question about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure. Further, if any source installations are made on the SSI, then this does not associate to the size of the container.
 
 ## Alternative
 
-One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA ROS ML]. They provide several different versions of ROS Docker and also provide several functions for installations. However, the author would argue (and of course the author tries to sell their idea), that with the SSI these installations could be easily applied to the container. This means that there are no issues with permissions when pulling or pushing with git, but again this project gives a lot of permissions to the containers. Further, if any source installations are made on the SSI, then this does not associate to the size of the container. Further, if we install with one container, we can also use the software for a container created with the same image. But PHA would not be a consuptions project without look at alternatives without thinking about integrating them, this could be an idea for the future.
+One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA ROS ML]. They provide several different versions of ROS Docker and also provide several functions for installations. However, the author would argue (and of course the author tries to sell their idea), that with the SSI these installations could be easily applied to the container. This means that there are no issues with permissions when pulling or pushing with git, but again this project gives a lot of permissions to the containers. Further, if we install with one container, we can also use the software for a container created with the same image. But PHA would not be a consuptions project without look at alternatives without thinking about integrating them, this could be an idea for the future.
 
 ## TL;DR Docker Compose
 
-This section would be short and sweet. If anyone wants more information, see [Docker Compose]. Just remember:
+This section would be short and sweet. If anyone wants more information, see [Docker Compose]. 
+
+#### Introduction
+
+Just remember:
 
 | **Command**| **Definition** |
 | `up` | Initialize and start the docker container |
 | `down` | Stop and remove the docker container |
 | `start` | Onyl start an available docker container  |
 | `stop` | Only stop a docker container |
+
+#### SSI, Folder Structure
 
 If you have not created the folder structure as explained in [Space for the SSI], setup the folder structure before we create the container:
 
@@ -50,6 +56,8 @@ mkdir schreibtisch
 cd schreibtisch
 git clone https://github.com/pradhanshrijal/pha_docker_files
 ```
+
+#### Sample Usage - Compose
 
 Sample up:
 
@@ -64,6 +72,30 @@ docker-compose -f envs/pha-22-mini/docker-compose.yaml down
 ```
 
 For `start` and `stop` it's the same as down.
+
+#### Sample Usage - Container
+
+With this method we are running docker in the background, now we will look at some additional functions:
+
+Entering Docker:
+
+`docker exec -it pha-22-mini /bin/bash`
+
+Stopping Docker:
+
+Don't forget to exit the container if you are inside of it.
+
+`docker stop pha-22-mini`
+
+Start Docker:
+
+Once you have initialized the container with `docker run` you don't have to run the command over and over again, We are storing it for future use:
+
+`docker start pha-22-mini`
+
+#### Workspace for Users
+
+Users can install their packages make changes in `/home/${USER}/schreibtisch/pha_docker_files/docker_share/git_pkgs`. This folder will not disappear if you wish to use docker like an acid bath technique and clear it out for a new fresh installation. It is hight recommended to use a version control system like git to maintain and save your work.
 
 ## Conclusion
 

@@ -79,19 +79,25 @@ With this method we are running docker in the background, now we will look at so
 
 Entering Docker:
 
-`docker exec -it pha-22-mini /bin/bash`
+```bash
+docker exec -it pha-22-mini /bin/bash
+```
 
 Stopping Docker:
 
 Don't forget to exit the container if you are inside of it.
 
-`docker stop pha-22-mini`
+```bash
+docker stop pha-22-mini
+```
 
 Start Docker:
 
 Once you have initialized the container with `docker run` you don't have to run the command over and over again, We are storing it for future use:
 
-`docker start pha-22-mini`
+```bash
+docker start pha-22-mini
+```
 
 #### Workspace for Users
 
@@ -106,6 +112,8 @@ This article series creates a base platform for the [PHA Project] where differen
 - [PHA 22 Mini]
 - [PHA Docker]
 - [Gemini]
+- [IKA ROS ML]
+- [IKA ROS]
 - [Docker Compose]
 
 [PHA Project]: {{site.url}}/pha-project/

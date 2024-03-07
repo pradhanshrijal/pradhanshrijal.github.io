@@ -17,13 +17,17 @@ tags:
 
 ## Introduction
 
-In this article we will learn how to create custom docker images for robotics, the PHA way. For this purpose [PHA Docker] has a second folder named `envs`. This folder already contains some sample projects, each identified by a folder. We will understand in detail how [PHA 22 Mini] was created. The `Dockerfile` is available in [PHA Docker] inside `envs/pha22-mini`.
+In this article we will learn how to create custom docker images for robotics, the PHA way. For this purpose [PHA Git] has a second folder named `envs`. This folder already contains some sample projects, each identified by a folder. We will understand in detail how [PHA 22 Mini] was created. The `Dockerfile` is available in [PHA Git] inside `envs/pha22-mini`.
 
 ## Necessity
 
 So up until this point we have learned how to run a container with this method and that should have been it for the article. But, we still have to talk about some specialized features [PHA 22 Mini] has compared to other docker container. The most important being the fact that rather than running the system as root, the container runs as a user. This is an important step for us as if your make any changes as root, it would overwrite the permissions within the shared folder. This means that even for the host the ownership of the changed file or folder would pass to root. Generally this is not what we want in our system.
 
-## Set the Arguments and Environment Variables
+## Sample Dockerfile
+
+Here is what we will do to re-create [PHA 22 Mini]:
+
+#### Set the Arguments and Environment Variables
 
 As most of PHA is a project invovling a GPU, we have to select a GPU enabled docker image as the base. [PHA 22 Mini] is build upon `nvidia/cuda:11.7.1-devel-ubuntu22.04`. In addition, we have to select a version of [CuDNN]. A good way to check CuDNN compatibility with the selected image is by checking the details of the distribution in [CUDA Gitlab]. Let's have a look at a set of parameters that defines the details of the image:
 
@@ -57,7 +61,7 @@ For our running example, the details are as follows:
 
 We define folders within the image where we will save the scripts that we will use for installations and where we will install local softwares.
 
-## Time Zone
+#### Time Zone
 
 To install some softwares such as ROS, we need to declare a time-zone, this is done with the following command:
 
@@ -67,7 +71,7 @@ ENV TZ=Europe/Berlin
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 ```
 
-## CUDA Environments
+#### CUDA Environments
 
 Now we will define the CUDA variables, these environment variable only work with defining the main variable as it appears in the installation format.
 
@@ -82,7 +86,7 @@ ENV NV_CUDNN_PACKAGE ${NV_CUDNN_PACKAGE_NAME}=${NV_CUDNN_PACKAGE_VERSION}+${NV_C
 ENV NV_CUDNN_PACKAGE_DEV ${NV_CUDNN_PACKAGE_NAME}-dev=${NV_CUDNN_PACKAGE_VERSION}+${NV_CUDA_VERSION}
 ```
 
-## Install General Packages
+#### Install General Packages
 
 The CUDA Images do not have the CuDNN packages pre-installed. Here we install these required packages and hold them to this version so that they are not upgraded in the future. Generally, upgrades are an headache when considering docker and CuDNN as there may be some ML packages that don't work with the new upgrade. Further, here we also install some basic packages: `sudo`, `wget` and `vim`.
 
@@ -102,7 +106,7 @@ RUN sudo apt update
 RUN sudo apt install vim -y
 ```
 
-## User Setup
+#### User Setup
 
 For the [PHA Project] what we have been doing is taking generally available docker instructions and merely organising it in such a way as to get the most out of it. Creating a user does a few things for us. First thing is that when accessing certain drivers as explained in [Chaotic Docker - Part I - Hardware Drivers], it makes a difference when you install the driver and grand access as root and as a sudo user. Basically, if you install packages as the root user, they cannot be accessed by the sudo user. This also holds true for installing python.
 
@@ -124,7 +128,7 @@ RUN mkdir /home/${NV_USERNAME}/docker_share
 RUN mkdir ${NV_SCRIPTS_PATH}
 ```
 
-## Copy Scripts
+#### Copy Scripts
 
 From the Single Source of Information (SSI) Structure explained in [Chaotic Docker - Part I - SSI Structure], we only need to copy `setup` and `install` for image creation. This same copied space would be used as SSI by a container. Once these files are copied, we will also copy the `.bashrc` from the `root` home to the `user` home and like before change the ownership of the file. The script `term_disp.sh` shortens the full path of the actual folder to just the name of the actual folder that is displayed in the terminal. As PHA creates several nested folders this become necessary. With large projects with dozens of modules, this is the same case. After that we all allowing `sudo` to be used without password input, something that would be necessary for automated image generation (else someone might have to babysit the image as it is being generated).
 
@@ -144,7 +148,7 @@ RUN sudo chown -R ${NV_USERNAME}:${NV_USERNAME} /home/${NV_USERNAME}/.bashrc
 RUN echo "${NV_USERNAME} ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers
 ```
 
-## Switch User
+#### Switch User
 
 Pretty basic, we switch to the designated user.
 
@@ -154,7 +158,7 @@ RUN ["/bin/bash", "-c", "source /root/.bashrc"]
 USER ${NV_USERNAME}
 ```
 
-## Install Base Packages
+#### Install Base Packages
 
 Now we can start with the installations of all the base packages used in the [PHA Mini]. First we set a path for the softwares that need to be installed locally. Before local installations, lets install python as debian packages. It is very important to perform this step after switching the user. Alongside `python3` we will also install `python3-pyqt5` for visualizations. We also install `pip` as it is a vital package installer and `venv` which is important for separating package installations specially when it comes to machine learning based packages. In addition we will also install the latest `cmake`, `g++` and `make`.
 
@@ -203,7 +207,7 @@ CUDA_CUDART_LIBRARY=/usr/local/$1/lib64/libcudart.so
 CUDA_MODULE_LOADING=LAZY
 ```
 
-## Install ROS
+#### Install ROS
 
 This is the main package we need for robotics. [ROS Humble] should be a good starting point for anyone interested in this robotics middleware. In this article we will only cover how to install it. In the `Dockerfile` we do it via a script.
 
@@ -269,7 +273,7 @@ source /home/${IN_USERNAME}/.bashrc
 
 This script automates the installation of ROS 2 Packages, for now it has been tested with `Foxy` and `Humble`. After it installs the requirements, it only installs the base ROS packages, this is done to keep the size of the corresponding image small. It further creates a sample ROS workspace and it also attaches `colcon_cd` to the system. See [Colcon Quick Directory] for more details.
 
-## Change Work Directory
+#### Change Work Directory
 
 The final step is to set the work directory to the home of the created user. Keep in mind that PHA does not explicity specify an entrypoint.
 
@@ -277,16 +281,44 @@ The final step is to set the work directory to the home of the created user. Kee
 WORKDIR "/home/${NV_USERNAME}"
 ```
 
+## Create a Docker Image
+
+If you have not created the folder structure as explained in [Chaotic Docker - Part I - Finally, Space for the SSI], setup the folder structure before we create the container.
+
+```bash
+cd /home/${USER}
+mkdir schreibtisch
+cd schreibtisch
+git clone https://github.com/pradhanshrijal/pha_docker_files
+```
+
+Now we can create a docker image
+
+```bash
+cd /home/${USER}/schreibtisch/pha_docker_files
+docker build -t phaenvs/pha-22-mini:sample -f envs/pha_22/Dockerfile --no-cache .
+```
+
+So we build our docker image by specifying the name with `-t, --tag` where `name:tag` is the convention. We specify the file with the `-f, --file` option. `--no-cache` option is used to remove the cache to reduce the size. When you are using a path to build an image then you use the `.`. 
+
+## Docker Hub
+
+Docker Hub is a cloud-based storage and sharing platform specifically designed for container images (*Powered by [Gemini][Gemini]*).
+
+Some samples of the images can be found in [phaenvs]. The definitions of the images are available in the [PHA Git Wiki].
+
 ## Conclusion
 
-This article explains how a CUDA enabled image is created with the principles of the [PHA Project]. In the next article we will discuss some of the positives and negatives of this method [[Chaotic Docker - Part III]].
+This article explains how a CUDA enabled image is created with the principles of the [PHA Project]. In the next article we will discuss some of the positives and negatives of this method and also provide a simpler application with `docker-compose` [[Chaotic Docker - Part III]].
 
 ## References
 
 - [Docker ROS Guide]
 - [Docker ROS 2 Guide]
 - [PHA 22 Mini]
-- [PHA Docker]
+- [PHA Git]
+- [PHA Git Wiki]
+- [phaenvs]
 - [Gemini]
 - [CuDNN]
 - [CUDA Gitlab]
@@ -299,9 +331,12 @@ This article explains how a CUDA enabled image is created with the principles of
 [Chaotic Docker - Part I]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/
 [Chaotic Docker - Part I - Hardware Drivers]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#hardware-drivers
 [Chaotic Docker - Part I - SSI Structure]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#structure-of-the-ssi
+[Chaotic Docker - Part I - Finally, Space for the SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#finally-space-for-the-ssi
 [Chaotic Docker - Part III]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-iii/
 [PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
-[PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files 
+[PHA Git]: https://github.com/pradhanshrijal/pha_docker_files
+[PHA Git Wiki]: https://github.com/pradhanshrijal/pha_docker_files/wiki
+[phaenvs]: https://hub.docker.com/u/phaenvs
 [Gemini]: https://gemini.google.com/
 [CuDNN]: https://developer.nvidia.com/cudnn
 [CUDA Gitlab]: https://gitlab.com/nvidia/container-images/cuda

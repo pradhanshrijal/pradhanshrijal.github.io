@@ -19,10 +19,14 @@ tags:
 
 There are already several very insightful articles available which details the basics of docker and how it's features can be applied into the area of robotics. The [Docker ROS Guide][Docker ROS Guide] and it's update counterpart [Docker ROS 2 Guide][Docker ROS 2 Guide] provide good introductions for using Docker and ROS in cohesion. On the other hand, the [Ubuntu White Paper][Ubuntu White Paper] puts forth some arguments against the use of Docker and ROS. In that light, this article is not about the basics of Docker or ROS. 
 
-This article series delves into a new approach to using Docker. An approach that will supercharge Docker for a large robotics stacks. We will list down all the necessary additional features when using Docker for robotics research, specifically with ROS, and provide substancial use cases and explanations for the said features. This article is the first of a three part series. 
+This article series delves into a new approach to using Docker. An approach that will supercharge Docker for a large robotics stacks. We will list down all the necessary additional features when using Docker for robotics research, specifically with ROS, and provide simple use cases and explanations for the said features. This article is the first of a three part series. 
 
 > **_NOTE:_**
 > Install Docker with [Easy Guide to Installing Docker].
+
+## TL;DR
+
+If you just want to use docker, ROS and the [PHA Project] in the simplex way possible goto [TLDR; Docker Compose] for a quick usage of Docker.
 
 ## Single Source of Information
 
@@ -403,6 +407,26 @@ This folder is a place holder for all the automated scripts that are relevant fo
 
 Users are encouraged to make any installations via a script so that they can be easily repeatable.
 
+## Docker after running
+
+With this method we are running docker in the background, now we will look at some additional functions:
+
+#### Entering Docker
+
+`docker exec -it pha-22-mini /bin/bash`
+
+#### Stopping Docker
+
+Don't forget to exit the container if you are inside of it.
+
+`docker stop pha-22-mini`
+
+#### Start Docker
+
+Once you have initialized the container with `docker run` you don't have to run the command over and over again, We are storing it for future use:
+
+`docker start pha-22-mini`
+
 ## Conclusion
 
 This article explains containerizing docker with a Single Source of Information (SSI) which serves as a base to fine tune the parameters for a robotics project. An extensive example of SSI will be introduced on a later article. This article is part of the [PHA Project] where different modules of the automated driving stack could be build upon. The next article set's up a docker image for a robotics project [[Chaotic Docker - Part II]].
@@ -435,6 +459,7 @@ This article explains containerizing docker with a Single Source of Information 
 [Ubuntu White Paper]: https://ubuntu.com/engage/dockerandros
 [PHA Project]: {{site.url}}/pha-project/
 [Chaotic Docker - Part II]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-ii/
+[TLDR; Docker Compose]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-iii/#tldr-docker-compose
 [PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
 [PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files 
 [Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/

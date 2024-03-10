@@ -107,7 +107,7 @@ Users can install their packages make changes in `/home/${USER}/schreibtisch/pha
 
 This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be built upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
 
-## References
+## Bibliography
 
 - [PHA 22 Mini]
 - [PHA Docker]

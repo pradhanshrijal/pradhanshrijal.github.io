@@ -167,7 +167,7 @@ Here's a short guide to Docker (*Powered by [ChatGPT][ChatGPT]*):
 
 This guide should give you a solid foundation to start using Docker for your development and deployment needs. Dive deeper into Docker's documentation and community resources for more advanced topics and best practices.
 
-## References
+## Bibliography
 
 - [NVIDIA Drivers]
 - [Docker Overview]

@@ -311,7 +311,7 @@ Some samples of the images can be found in [phaenvs]. The definitions of the ima
 
 This article explains how a CUDA enabled image is created with the principles of the [PHA Project]. In the next article we will discuss some of the positives and negatives of this method and also provide a simpler application with `docker-compose` [[Chaotic Docker - Part III]].
 
-## References
+## Bibliography
 
 - [Docker ROS Guide]
 - [Docker ROS 2 Guide]

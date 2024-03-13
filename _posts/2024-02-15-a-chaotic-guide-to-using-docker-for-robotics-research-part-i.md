@@ -449,7 +449,7 @@ docker start pha-22-mini
 
 This article explains containerizing docker with a Single Source of Information (SSI) which serves as a base to fine tune the parameters for a robotics project. An extensive example of SSI will be introduced on a later article. This article is part of the [PHA Project] where different modules of the automated driving stack could be build upon. The next article set's up a docker image for a robotics project [[Chaotic Docker - Part II]].
 
-## References
+## Bibliography
 
 - [Docker ROS Guide]
 - [Docker ROS 2 Guide]

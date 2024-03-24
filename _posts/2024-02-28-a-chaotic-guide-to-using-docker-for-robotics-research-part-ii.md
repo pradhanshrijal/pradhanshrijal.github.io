@@ -337,9 +337,12 @@ USER root
 ARG USERNAME=devuser
 ARG UID=${UID}
 ARG GID=${GID}
+
+# Remove User
+RUN userdel pha
 ```
 
-What we did here is first to make sure that the current user is `root` so as to make sure we are creating the new user properly. Then we set the variables for the username, *UID* and *GID* of the user we want to pass to docker.
+What we did here is first to make sure that the current user is `root` so as to make sure we are creating the new user properly. Then we set the variables for the username, *UID* and *GID* of the user we want to pass to docker. We also have to delete any current user incase there is an id conflict.
 
 #### Create User
 

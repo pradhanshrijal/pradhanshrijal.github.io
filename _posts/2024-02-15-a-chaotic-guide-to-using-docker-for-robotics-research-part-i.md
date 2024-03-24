@@ -28,7 +28,7 @@ This article series delves into a new approach to using Docker. An approach that
 
 The main idea of this article is to create a Single Source of Information (SSI) for all the parameters and specifications for a robotics project. This idea helps to make sure that all the parameters required to setup a robot are referenced from and can be changed via a single file. This helps to maintain the complexity of a large robotics projects with several sub-modules. Further, these specifications generally includes weights and models that might not be be feasible to be used within a docker container. To this end, the single source of information must be place within a shared space between the docker and the main operating system. Such a space also is not allocated to the total usage space of docker when works at an advantage when the same weights have to be used in two container instances (say when comparing some changes to a module).
 
-The remainder of the article would then focus on this concept and explain in detail each component that would allow docker to be used in such a manner.
+The remainder of the article would then focus on this concept and explain in detail each component that would allow docker to be used in such a manner. See [Single Source of Truth - SSOT] for more information.
 
 ## TL;DR
 
@@ -36,7 +36,7 @@ If you just want to use docker, ROS and the [PHA Project] in the simplest way po
 
 ## Sample Container Usage
 
-Let's start with a sample usage of the concept, and then we can meticulously break it down piece by piece. For this purpose, we will use [PHA 22 Mini] which is an image specialized for this project. The details of this container are as follows:
+Let's start with a sample usage of the concept, and then we can meticulously break it down piece by piece. For this purpose, we will use [PHA 22 Micro] which is an image specialized for this project. The details of this container are as follows:
 - Ubuntu 22.04
 - Cuda 11.7.1
 - CuDNN 8.5.0.96
@@ -47,7 +47,7 @@ The command to run this image as a container is:
 xhost +local:docker
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     -e DISPLAY=$DISPLAY \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
@@ -61,7 +61,7 @@ docker run \
     -v /media/${USER}:/media/pha \
     -v /dev:/dev \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -99,22 +99,22 @@ Now that we have a short introduction to the commands used, let's break it down 
 #### Simple Container Run
 
 ```bash
-docker run phaenvs/pha-22-mini
+docker run phaenvs/pha-22:micro
 ```
 
 This command follows the principle:
 
 - `docker run`: Tells Docker to run a container.
-- `phaenvs/pha-22-mini`: Specifies the image name `phaenvs/pha-22-mini` which presumably contains the application you want to run.
+- `phaenvs/pha-22:micro`: Specifies the image name `phaenvs/pha-22` and the tag `micro` which presumably contains the application you want to run.
 
-This would start a container based on the `phaenvs/pha-22-mini` image. However, The container would terminate after the application finishes unless you specify additional options to keep it running (*Powered by [Gemini][Gemini]*).
+This would start a container based on the `phaenvs/pha-22:micro` image. However, The container would terminate after the application finishes unless you specify additional options to keep it running (*Powered by [Gemini][Gemini]*).
 
 #### Adding a Name to the Container
 
 In the previous example the created container would get a random name assigned to it, to assign a specific name, we can use the `--name` option.
 
 ```bash
-docker run --name pha-22-mini phaenvs/pha-22-mini
+docker run --name pha-22-micro phaenvs/pha-22:micro
 ```
 
 Remember:
@@ -126,13 +126,13 @@ Remember:
 For the example that we have been running till now the container would generally terminate when it is exited. Another example of it would be to run the container for a single instance with `--rm` option, which automatically removes the container when it exits.
 
 ```bash
-docker run --name pha-22-mini --rm phaenvs/pha-22-mini
+docker run --name pha-22-micro --rm phaenvs/pha-22:micro
 ```
 
 But this is not what we want, we want the container to be running on the background and to stay dormant when exited or stopped. For this purpose we will use `-d` option to detach it and `-it` to keep STDIN one even if the container is not attached and allocate a pseudo-terminal to interract with the application inside the container.
 
 ```bash
-docker run -d --name pha-22-mini -it phaenvs/pha-22-mini
+docker run -d --name pha-22-micro -it phaenvs/pha-22:micro
 ```
 
 #### Command
@@ -140,7 +140,7 @@ docker run -d --name pha-22-mini -it phaenvs/pha-22-mini
 We can send a command that is executed when the docker container starts. As we are running a detached container, what we will do is send the command `/bin/bash` so that our pseudo-TTY with start a bash shell. It is possible to replace this with a particular command that can be run on the container (but we will not do that here).
 
 ```bash
-docker run -d --name pha-22-mini -it phaenvs/pha-22-mini /bin/bash
+docker run -d --name pha-22-micro -it phaenvs/pha-22:micro /bin/bash
 ```
 
 #### Sharing the Network
@@ -148,7 +148,7 @@ docker run -d --name pha-22-mini -it phaenvs/pha-22-mini /bin/bash
 What we will do now is to share the host network with docker. This allows ROS 2 to communicate with several containers. Further, any applications running in the local ip can be shared with the container clusters. This can be done with `--network host`.
 
 ```bash
-docker run -d --name pha-22-mini --network host -it phaenvs/pha-22-mini /bin/bash
+docker run -d --name pha-22-micro --network host -it phaenvs/pha-22:micro /bin/bash
 ```
 
 A safer alternative to this might be to create a dedicated docker network, see [Docker network] for instructions. The applied method allows the docker container to be accessed remotely as well, during development it can be a key positive as the system (or the robot) can be accessed from anywhere.
@@ -164,13 +164,13 @@ P.S. The command is getting bigger so let's start writing it down in many lines 
 ```bash
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
     --runtime=nvidia \
     --network host \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -183,14 +183,14 @@ What we will do now is to take out the training wheels that docker has on. The `
 ```bash
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
     --runtime=nvidia \
     --privileged \
     --network host \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -205,7 +205,7 @@ The first access we will give docker is to use the host display. This would allo
 ```bash
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     -e DISPLAY=$DISPLAY \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
@@ -215,7 +215,7 @@ docker run \
     --network host \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -244,7 +244,7 @@ We will now map the `/media` folder to the container.
 ```bash
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     -e DISPLAY=$DISPLAY \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
@@ -255,7 +255,7 @@ docker run \
     -v /tmp/.X11-unix:/tmp/.X11-unix \
     -v /media/${USER}:/media/pha \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -278,14 +278,14 @@ Important Points to Remember:
 - Do not modify device files directly: Messing with device files can lead to unexpected behavior or even damage your system. It's generally recommended to interact with hardware through device drivers and user interfaces provided by the operating system.
 - Use tools for managing devices: You can use system administration tools or graphical utilities to view information about devices, format storage devices, or mount partitions.
 
-Understanding the `/dev` directory is not essential for everyday usage, but it provides valuable insight into how your system interacts with hardware components. If you're interested in learning more about specific devices or troubleshooting hardware issues, consulting the Linux documentation or seeking help from experienced users is recommended (*Powered by [Gemini][Gemini]*).
+Understanding the `/dev` directory is not essential for everyday usage, but it provides valuable insight into how your system interacts with hardware components. If you are interested in learning more about specific devices or troubleshooting hardware issues, consulting the Linux documentation or seeking help from experienced users is recommended (*Powered by [Gemini][Gemini]*).
 
 So now we map the `/dev` folder into the container.
 
 ```bash
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     -e DISPLAY=$DISPLAY \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
@@ -297,7 +297,7 @@ docker run \
     -v /media/${USER}:/media/pha \
     -v /dev:/dev \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -320,7 +320,7 @@ Context:
 ```bash
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     -e DISPLAY=$DISPLAY \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
@@ -333,7 +333,7 @@ docker run \
     -v /media/${USER}:/media/pha \
     -v /dev:/dev \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -371,7 +371,7 @@ Well that's about it, now we can repeat the `docker run` one final time, the one
 xhost +local:docker
 docker run \ 
     -d \
-    --name pha-22-mini \
+    --name pha-22-micro \
     -e DISPLAY=$DISPLAY \
     --env=NVIDIA_VISIBLE_DEVICES=all \
     --env=NVIDIA_DRIVER_CAPABILITIES=all  \
@@ -385,7 +385,7 @@ docker run \
     -v /media/${USER}:/media/pha \
     -v /dev:/dev \
     --gpus all \
-    -it phaenvs/pha-22-mini \
+    -it phaenvs/pha-22:micro \
     /bin/bash
 ```
 
@@ -426,7 +426,7 @@ With this method we are running docker in the background, now we will look at so
 #### Entering Docker
 
 ```bash
-docker exec -it pha-22-mini /bin/bash
+docker exec -it pha-22-micro /bin/bash
 ```
 
 #### Stopping Docker
@@ -434,7 +434,7 @@ docker exec -it pha-22-mini /bin/bash
 Don't forget to exit the container if you are inside of it.
 
 ```bash
-docker stop pha-22-mini
+docker stop pha-22-micro
 ```
 
 #### Start Docker
@@ -442,7 +442,7 @@ docker stop pha-22-mini
 Once you have initialized the container with `docker run` you don't have to run the command over and over again, We are storing it for future use:
 
 ```bash
-docker start pha-22-mini
+docker start pha-22-micro
 ```
 
 ## Conclusion
@@ -456,7 +456,8 @@ This article explains containerizing docker with a Single Source of Information 
 - [Docker run]
 - [Docker network]
 - [Ubuntu White Paper]
-- [PHA 22 Mini]
+- [Single Source of Truth - SSOT]
+- [PHA 22 Micro]
 - [PHA Docker]
 - [Using GPU in Docker]
 - [Container GUI]
@@ -475,10 +476,11 @@ This article explains containerizing docker with a Single Source of Information 
 [Docker run]: https://docs.docker.com/reference/cli/docker/container/run/
 [Docker network]: https://docs.docker.com/reference/cli/docker/network/
 [Ubuntu White Paper]: https://ubuntu.com/engage/dockerandros
+[Single Source of Truth - SSOT]: https://www.mulesoft.com/resources/esb/what-is-single-source-of-truth-ssot
 [PHA Project]: {{site.url}}/pha-project/
 [Chaotic Docker - Part II]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-ii/
 [TLDR; Docker Compose]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-iii/#tldr-docker-compose
-[PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
+[PHA 22 Micro]: https://hub.docker.com/layers/phaenvs/pha-22/micro/images/sha256-42478c1cc914bc0255942bb4a2d27fbd2c2c6f1fc1d81771fb5a41ea6ebc08ce?context=explore
 [PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files 
 [Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
 [Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/

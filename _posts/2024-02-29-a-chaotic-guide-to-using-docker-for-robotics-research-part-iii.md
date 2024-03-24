@@ -21,11 +21,13 @@ This article is the conclusion to the Chaotic Docker Series, which creates a bas
 
 ## Advantages
 
-The goal of Single Source of Information ([SSI]) is to provide a platform where different software packages can be used modularly in their dockerized forms for different systems. This means that it is a very flexible development platform that would be robust to changes that come during any development process. Another advantage of the SSI is that since this space is shared between the host and the container, no credentials have to be passed to the container. Any changes to the softwares can be made from the host system.
+The goal of Single Source of Information ([SSI]) is to provide a platform where different software packages can be used modularly in their dockerized forms for different systems. This means that it is a very flexible development platform that would be robust to changes that come during any development process. Another advantage of the SSI is that since this space is shared between the host and the container, no credentials have to be passed to the container. Any changes to the softwares can be made from the host system. Further, if any source installations are made on the SSI, then this does not associate to the size of the container.
 
 ## Disadvantages
 
-The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest question about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure. Further, if any source installations are made on the SSI, then this does not associate to the size of the container.
+The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest rebuttle about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure.
+
+Another point to consider is that if there are several users setup in the host system, the permissions these users have regarding docker must be properly setup. Else the [SSI] folder might be owned by one user and Docker in general, regardless of which user has access, would be owned by one particular user. This is avoided by setting the host user in the docker container which is documented in 
 
 ## Alternative
 
@@ -122,6 +124,7 @@ This article series creates a base platform for the [PHA Project] where differen
 [Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
 [SSI]: {{site.url}}/blog/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#single-source-of-information
 [Space for the SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#finally-space-for-the-ssi
+[User Host Machine]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-ii/#user-from-the-host-machine
 [Gemini]: https://gemini.google.com/
 [IKA ROS ML]: https://github.com/ika-rwth-aachen/docker-ros-ml-images
 [IKA ROS]: https://github.com/ika-rwth-aachen/docker-ros

@@ -21,7 +21,7 @@ In this article we will learn how to create custom docker images for robotics, t
 
 ## Necessity
 
-So up until this point we have learned how to run a container with this method and that should have been it for the article. But, we still have to talk about some specialized features [PHA 22 Mini] has compared to other docker container. The most important being the fact that rather than running the system as root, the container runs as a user. This is an important step for us as if your make any changes as root, it would overwrite the permissions within the shared folder. This means that even for the host the ownership of the changed file or folder would pass to root. Generally this is not what we want in our system.
+So up until this point we have learned how to run a container with this method and that should have been it for the article. But, we still have to talk about some specialized features [PHA 22 Mini] has compared to other docker container. The most important being the fact that rather than running the system as root, the container runs as a user. This is an important step for us because if you make any changes as root, it would overwrite the permissions within the shared folder. This means that even for the host the ownership of the changed file or folder would pass to root. Generally this is not what we want in our system.
 
 ## Sample Dockerfile
 
@@ -296,7 +296,7 @@ Now we can create a docker image.
 
 ```bash
 cd /home/${USER}/schreibtisch/pha_docker_files
-docker build -t phaenvs/pha-22-mini:sample -f envs/pha_22/Dockerfile --no-cache .
+docker build -t phaenvs/pha-22:mini-sample -f envs/pha-22-mini/Dockerfile --no-cache .
 ```
 
 So we build our docker image by specifying the name with `-t, --tag` where `name:tag` is the convention. We specify the file with the `-f, --file` option. `--no-cache` option is used to remove the cache to reduce the size. When you are using a path to build an image then you use the `.`. 
@@ -306,6 +306,57 @@ So we build our docker image by specifying the name with `-t, --tag` where `name
 Docker Hub is a cloud-based storage and sharing platform specifically designed for container images (*Powered by [Gemini][Gemini]*).
 
 Some samples of the images can be found in [phaenvs]. The definitions of the images are available in the [PHA Git Wiki].
+
+## User from the Host Machine
+
+What we have learned till now generally works very well. But there are cases when docker permissions are associated to a particular user. This means in an Ubuntu system with several users, the current host is not the one to whon docker permissions are associated with. In such cases, to use the [SSI] we have to perform one additional step. This is to pass the user from the host machine to docker. 
+
+In this case, we have to create a specialized docker image by passing the user specific information to the image.
+
+This method is available as a seperate `env` in [PHA Git], called `custom-user`. 
+
+#### Set the variables
+
+```dockerfile
+# Declare VARIABLES
+ARG IMAGE_NAME=phaenvs/pha-22
+ARG IMAGE_VERSION=latest
+ARG DEBIAN_FRONTEND=noninteractive
+
+FROM ${IMAGE_NAME}:${IMAGE_VERSION} as base
+FROM base as base-amd64
+```
+
+We set the name and tag of the image we want to use as variable and we make sure we do not have to interract with any installations. The we select the `amd64` version of the image as that is what we will be working with. 
+
+#### User Details
+
+```dockerfile
+USER root
+
+ARG USERNAME=devuser
+ARG UID=${UID}
+ARG GID=${GID}
+```
+
+What we did here is first to make sure that the current user is `root` so as to make sure we are creating the new user properly. Then we set the variables for the username, *UID* and *GID* of the user we want to pass to docker.
+
+#### Create User
+
+```dockerfile
+# Create new user and home directory
+RUN groupadd --gid $GID $USERNAME \
+ && useradd --uid ${UID} --gid ${GID} --create-home ${USERNAME} \
+ && echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > /etc/sudoers.d/${USERNAME} \
+ && chmod 0440 /etc/sudoers.d/${USERNAME} \
+ && mkdir -p /home/${USERNAME} \
+ && chown -R ${UID}:${GID} /home/${USERNAME}
+
+ USER ${USERNAME}
+ WORKDIR "/home/${USERNAME}"
+ ```
+
+ We then create the new docker user with the user variable that were set in the previous section. This makes sure that our docker user and the host user have the same permission IDs. Finally, in our new image we set the new created user as the default and change the work directory to the home of this user. All this is documented well in [Set User Container Host].
 
 ## Conclusion
 
@@ -324,6 +375,7 @@ This article explains how a CUDA enabled image is created with the principles of
 - [CUDA Gitlab]
 - [ROS Humble]
 - [Colcon Quick Directory]
+- [Set User Container Host]
 
 [Docker ROS Guide]: https://roboticseabass.com/2021/04/21/docker-and-ros/
 [Docker ROS 2 Guide]: https://roboticseabass.com/2023/07/09/updated-guide-docker-and-ros2/
@@ -333,7 +385,7 @@ This article explains how a CUDA enabled image is created with the principles of
 [Chaotic Docker - Part I - SSI Structure]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#structure-of-the-ssi
 [Chaotic Docker - Part I - Finally, Space for the SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#finally-space-for-the-ssi
 [Chaotic Docker - Part III]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-iii/
-[PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
+[PHA 22 Mini]: https://hub.docker.com/layers/phaenvs/pha-22/mini/images/sha256-9a6281b350f1d279374f28fc5d9b70e0996b1f6b588593ae37b622c09d58ca74?context=explore
 [PHA Git]: https://github.com/pradhanshrijal/pha_docker_files
 [PHA Git Wiki]: https://github.com/pradhanshrijal/pha_docker_files/wiki
 [phaenvs]: https://hub.docker.com/u/phaenvs
@@ -342,3 +394,4 @@ This article explains how a CUDA enabled image is created with the principles of
 [CUDA Gitlab]: https://gitlab.com/nvidia/container-images/cuda
 [ROS Humble]: https://docs.ros.org/en/humble/index.html
 [Colcon Quick Directory]: https://colcon.readthedocs.io/en/released/user/installation.html#quick-directory-changes
+[Set User Container Host]: https://www.baeldung.com/ops/docker-set-user-container-host

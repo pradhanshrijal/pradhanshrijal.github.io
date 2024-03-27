@@ -355,11 +355,11 @@ RUN groupadd --gid $GID $USERNAME \
  && mkdir -p /home/${USERNAME} \
  && chown -R ${UID}:${GID} /home/${USERNAME}
 
- USER ${USERNAME}
- WORKDIR "/home/${USERNAME}"
- ```
+USER ${USERNAME}
+WORKDIR "/home/${USERNAME}"
+```
 
- We then create the new docker user with the user variable that were set in the previous section. This makes sure that our docker user and the host user have the same permission IDs. Finally, in our new image we set the new created user as the default and change the work directory to the home of this user. All this is documented well in [Set User Container Host].
+We then create the new docker user with the user variable that were set in the previous section. This makes sure that our docker user and the host user have the same permission IDs. Finally, in our new image we set the new created user as the default and change the work directory to the home of this user. All this is documented well in [Set User Container Host].
 
 ## Conclusion
 

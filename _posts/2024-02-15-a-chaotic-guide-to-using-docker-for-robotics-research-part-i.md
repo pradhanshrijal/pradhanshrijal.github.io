@@ -65,7 +65,7 @@ docker run \
     /bin/bash
 ```
 
-#### Description
+#### Run Description
 
 `xhost` is used to allow a docker container to share the screen.
 
@@ -482,7 +482,7 @@ This article explains containerizing docker with a Single Source of Information 
 [TLDR; Docker Compose]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-iii/#tldr-docker-compose
 [PHA 22 Micro]: https://hub.docker.com/layers/phaenvs/pha-22/micro/images/sha256-42478c1cc914bc0255942bb4a2d27fbd2c2c6f1fc1d81771fb5a41ea6ebc08ce?context=explore
 [PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files 
-[Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
+[Easy Guide to Installing Docker]: {{site.url}}/{{page.categories}}/easy-guide-to-installing-docker/
 [Using GPU in Docker]: https://blog.roboflow.com/use-the-gpu-in-docker/
 [Container GUI]: https://leimao.github.io/blog/Docker-Container-GUI-Display/
 [Docker GUI]: https://linuxmeerkat.wordpress.com/2014/10/17/running-a-gui-application-in-a-docker-container/

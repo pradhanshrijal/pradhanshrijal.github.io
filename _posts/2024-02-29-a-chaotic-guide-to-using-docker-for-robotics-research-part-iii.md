@@ -35,7 +35,7 @@ One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA R
 
 ## TL;DR Docker Compose
 
-This section would be short and sweet. If anyone wants more information, see [Docker Compose]. 
+This section would be short and sweet. If anyone wants more information, see [Docker Compose]. Compare between [Docker Run Options] and [Sample Docker Compose] to understand the commands used in a compose file.
 
 #### Introduction
 
@@ -105,6 +105,48 @@ docker start pha-22-mini
 
 Users can install their packages make changes in `/home/${USER}/schreibtisch/pha_docker_files/docker_share/git_pkgs`. This folder will not disappear if you wish to use docker like an acid bath technique and clear it out for a new fresh installation. It is hight recommended to use a version control system like git to maintain and save your work.
 
+## TL;DR PHA Scripts
+
+All these commands can be run with scripts available with [PHA Docker]. We will see some sample applications:
+
+First of all, go to the main folder we established in the previous section.
+
+```bash
+cd /home/${USER}/schreibtisch/pha_docker_files
+```
+
+From here we can run simple scripts. Let's look at the previous example again. First with `docker run` and then with `docker-compose`.
+
+#### Docker Run Scripts
+
+```bash
+./run.sh -t mini -c pha-22-mini
+```
+
+Don't for get to stop the container once done.
+
+#### Compose Scripts
+
+The compose scripts are much better oriented for a multitude of commands.
+
+You can turn a compose script up, with the variables defined in an environement file:
+
+```bash
+./docker_scripts/run-compose.sh -e docker_scripts/compose-file-mini.env
+```
+
+And even stop, start and turn down an available container:
+
+```bash
+./docker_scripts/run-compose.sh -e docker_scripts/compose-file-mini.env -o down
+```
+
+There is also a script to directly pass the user to a specified image:
+
+```bash
+./docker_scripts/run-compose.sh -e docker_scripts/compose-file-user.env -f docker_scripts/docker-compose-user.yaml
+```
+
 ## Conclusion
 
 This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be built upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
@@ -120,11 +162,13 @@ This article series creates a base platform for the [PHA Project] where differen
 
 [PHA Project]: {{site.url}}/pha-project/
 [PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
-[PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files 
-[Easy Guide to Installing Docker]: {{site.url}}/blog/easy-guide-to-installing-docker/
-[SSI]: {{site.url}}/blog/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#single-source-of-information
+[PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files
+[Sample Docker Compose]: https://github.com/pradhanshrijal/pha_docker_files/blob/master/docker_scripts/docker-compose-user.yaml
+[Easy Guide to Installing Docker]: {{site.url}}/{{page.categories}}/easy-guide-to-installing-docker/
+[SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#single-source-of-information
 [Space for the SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#finally-space-for-the-ssi
 [User Host Machine]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-ii/#user-from-the-host-machine
+[Docker Run Options]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#run-description
 [Gemini]: https://gemini.google.com/
 [IKA ROS ML]: https://github.com/ika-rwth-aachen/docker-ros-ml-images
 [IKA ROS]: https://github.com/ika-rwth-aachen/docker-ros

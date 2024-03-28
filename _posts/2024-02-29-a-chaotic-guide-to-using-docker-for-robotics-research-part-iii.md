@@ -4,7 +4,7 @@ title:      A Chaotic Guide to Using Docker for Robotics Research - Part III
 subtitle:   Comments and Docker Compose
 date:       2024-02-29
 author:     Shrijal Pradhan
-ext-img: "https://oneclick-cloud.com/wp-content/uploads/2023/08/Bigstock_-139961875-Docker-Emblem.-A-Blue-Whale-With-Several-Containers.-e1574090673987-1.jpg"
+ext-img: "https://drscdn.500px.org/photo/1089310148/q%3D90_m%3D2048/v2?sig=55a092176f8d949901e377fba1f9b53e42504a8592bfa103168f7da5fdba84cd"
 catalog: true
 categories: blog
 permalink: /:categories/:title/

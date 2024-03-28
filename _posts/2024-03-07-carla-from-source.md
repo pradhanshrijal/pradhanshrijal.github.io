@@ -1,10 +1,10 @@
 ---
 layout:     post
 title:      Carla from Source
-subtitle:   PHA and Carla
+subtitle:   Super Bulky
 date:       2024-03-07
 author:     Shrijal Pradhan
-header-img: img/post-maspalomas.jpg
+ext-img: "https://drscdn.500px.org/photo/1089310565/q%3D80_m%3D600/v2?sig=fffd99b5c846121255b51a8b17b8b540feb6e473daca5ad59b0fdd297f04d60f"
 catalog: true
 categories: blog
 permalink: /:categories/:title/
@@ -239,6 +239,8 @@ make launch -opengl
 ---
 ## Known Issues
 
+Here are some known issues with this method, and some solutions
+
 #### Using Vulkan to launch Carla
 
 The normal way to launch Carla is with vulkan. With this installation method, the system crashes when running this way. This is the reason the launch method uses the `-opengl` flag. See [Can't Launch Carla].
@@ -256,6 +258,15 @@ When changing map there are several issues with Carla. The CPU load explodes, no
 ```bash
 source /home/${USER}/docker_share/scripts/functions/carla_map_update.sh 01
 ```
+
+#### Size of the Installations
+
+The main reason that this installation makes sense to be done this way is that the Unreal and Carla Source packages are very bulky. In total they are about 90 GB large. If we make a docker container out of it then it becomes too bloated. With this method the install can be associated with the host storage. It can be very easy to install the packages into an external SSD device.
+
+---
+## Conclusion
+
+This article provides an alternative simulation installation for the [PHA Project] using Unreal Engine 4 and Carla with Ubuntu 22.04. This also serves as an example to install packages with docker without bloating the size of the container itself.
 
 ---
 ## Bibliography
@@ -289,3 +300,4 @@ source /home/${USER}/docker_share/scripts/functions/carla_map_update.sh 01
 [Can't Launch Carla]: https://github.com/carla-simulator/carla/issues/2138#issuecomment-616114548
 [Carla FPS Rate]: https://github.com/carla-simulator/carla/issues/3654#issuecomment-737042264
 [8854804]: https://github.com/carla-simulator/carla/commit/8854804f4d7748e14d937ec763a2912823a7e5f5
+---

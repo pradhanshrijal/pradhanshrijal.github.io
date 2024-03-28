@@ -4,7 +4,7 @@ title:      A Chaotic Guide to Using Docker for Robotics Research - Part II
 subtitle:   Creating a docker image, the PHA Way
 date:       2024-02-28
 author:     Shrijal Pradhan
-ext-img: "https://oneclick-cloud.com/wp-content/uploads/2023/08/Bigstock_-139961875-Docker-Emblem.-A-Blue-Whale-With-Several-Containers.-e1574090673987-1.jpg"
+ext-img: "https://drscdn.500px.org/photo/1089309581/q%3D90_m%3D2048/v2?sig=0f169cfa209f8c9ff1a0495b1e2d44172a31283d79bcd8f327d2b59a57726557"
 catalog: true
 categories: blog
 permalink: /:categories/:title/

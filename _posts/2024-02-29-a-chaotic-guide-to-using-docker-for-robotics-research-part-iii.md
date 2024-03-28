@@ -147,6 +147,10 @@ There is also a script to directly pass the user to a specified image:
 ./docker_scripts/run-compose.sh -e docker_scripts/compose-file-user.env -f docker_scripts/docker-compose-user.yaml
 ```
 
+## Full Usage
+
+Checkout [PHA Git Wiki - Usage] for the full options available for scripts.
+
 ## Conclusion
 
 This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be built upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
@@ -155,14 +159,16 @@ This article series creates a base platform for the [PHA Project] where differen
 
 - [PHA 22 Mini]
 - [PHA Docker]
+- [PHA Git Wiki - Usage]
 - [Gemini]
 - [IKA ROS ML]
 - [IKA ROS]
 - [Docker Compose]
 
 [PHA Project]: {{site.url}}/pha-project/
-[PHA 22 Mini]: https://hub.docker.com/r/phaenvs/pha-22-mini
+[PHA 22 Mini]: https://hub.docker.com/layers/phaenvs/pha-22/mini/images/sha256-9a6281b350f1d279374f28fc5d9b70e0996b1f6b588593ae37b622c09d58ca74?context=explore
 [PHA Docker]: https://github.com/pradhanshrijal/pha_docker_files
+[PHA Git Wiki - Usage]: https://github.com/pradhanshrijal/pha_docker_files/wiki/Scripts-Usage
 [Sample Docker Compose]: https://github.com/pradhanshrijal/pha_docker_files/blob/master/docker_scripts/docker-compose-user.yaml
 [Easy Guide to Installing Docker]: {{site.url}}/{{page.categories}}/easy-guide-to-installing-docker/
 [SSI]: {{site.url}}/{{page.categories}}/a-chaotic-guide-to-using-docker-for-robotics-research-part-i/#single-source-of-information

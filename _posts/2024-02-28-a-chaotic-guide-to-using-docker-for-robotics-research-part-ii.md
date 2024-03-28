@@ -305,7 +305,7 @@ So we build our docker image by specifying the name with `-t, --tag` where `name
 
 Docker Hub is a cloud-based storage and sharing platform specifically designed for container images (*Powered by [Gemini][Gemini]*).
 
-Some samples of the images can be found in [phaenvs]. The definitions of the images are available in the [PHA Git Wiki].
+Some samples of the images can be found in [phaenvs]. The definitions of the images are available in the [PHA Git Wiki - Images].
 
 ## User from the Host Machine
 
@@ -372,6 +372,7 @@ This article explains how a CUDA enabled image is created with the principles of
 - [PHA 22 Mini]
 - [PHA Git]
 - [PHA Git Wiki]
+- [PHA Git Wiki - Images]
 - [phaenvs]
 - [Gemini]
 - [CuDNN]
@@ -391,6 +392,7 @@ This article explains how a CUDA enabled image is created with the principles of
 [PHA 22 Mini]: https://hub.docker.com/layers/phaenvs/pha-22/mini/images/sha256-9a6281b350f1d279374f28fc5d9b70e0996b1f6b588593ae37b622c09d58ca74?context=explore
 [PHA Git]: https://github.com/pradhanshrijal/pha_docker_files
 [PHA Git Wiki]: https://github.com/pradhanshrijal/pha_docker_files/wiki
+[PHA Git Wiki - Images]: https://github.com/pradhanshrijal/pha_docker_files/wiki/PHA-Images
 [phaenvs]: https://hub.docker.com/u/phaenvs
 [Gemini]: https://gemini.google.com/
 [CuDNN]: https://developer.nvidia.com/cudnn

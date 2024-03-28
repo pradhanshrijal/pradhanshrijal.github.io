@@ -29,6 +29,7 @@ This is the bare minimum requirement to get started with the mentioned docker se
 > **_NOTE:_**
 > The Version of Docker and NVIDIA Docker should note that relevant, it is advised to use the latest available vesion.
 
+---
 ## Installing Ubuntu
 
 The two main concepts in installing Ubuntu is to [Create a bootable USB stick][Create a bootable USB stick] and [Dual Boot][Dual Boot]. As a basis for this guideline, install Ubuntu as per individual needs and resource availabilities. However, it is suggested to allocate atleast 150 GB to the `ROOT` Folder of Ubuntu as that is where Docker images and containers are stored by default.
@@ -38,6 +39,7 @@ As these are a set of instructions that cannot be narrowed down to a simple scri
 > **_NOTE:_**
 > It should also be possible to install Ubuntu directly in Windows via [Windows Subsystem for Linux][WSL2] and use docker directly inside it bit this scope will not be explored in this article.
 
+---
 ## Installing NVIDIA Driver
 
 > **_NOTE:_**
@@ -57,6 +59,7 @@ If the drivers are installed then this command would produce no errors and would
 sudo apt install nvidia-driver-525 -y
 ```
 
+---
 ## Installing Docker
 
 As this is an Open Source project, we will use only docker engine, which is free. Read the [Docker Overview][Docker Overview] to tingle the knowledge taste buds. 
@@ -90,6 +93,7 @@ sudo usermod -aG docker $USER
 
 The user must then log out and back in for the settings to take effect. 
 
+---
 ## Installing NVIDIA Docker
 
 Now that we have installed Docker, we will configure the compatibility of Docker with NVIDIA Drivers. We do this with [NVIDIA Container Toolkit][Install NVIDIA Container Toolkit] which replaces [Nvidia-Docker][Nvidia-Docker]. The toolkit allows users to build and run GPU-accelerated containers. The article [Using GPU in Docker][Using GPU in Docker] goes into more depth in the matter.
@@ -111,10 +115,12 @@ sudo apt-get install -y nvidia-container-toolkit
 
 Once these installations are completed, we can start with docker containers. With the acception of sensor and ROS drivers; everything else required for the project can be installed within the containers.
 
+---
 ## Conclusion
 
 This guideline is part of the [PHA Project]. The next article explains how to use a container for a robotics project [[Chaotic Docker - Part I]].
 
+---
 ## Short Introduction to Docker (Bonus)
 
 Here's a short guide to Docker (*Powered by [ChatGPT][ChatGPT]*):
@@ -167,6 +173,7 @@ Here's a short guide to Docker (*Powered by [ChatGPT][ChatGPT]*):
 
 This guide should give you a solid foundation to start using Docker for your development and deployment needs. Dive deeper into Docker's documentation and community resources for more advanced topics and best practices.
 
+---
 ## Bibliography
 
 - [NVIDIA Drivers]
@@ -198,3 +205,4 @@ This guide should give you a solid foundation to start using Docker for your dev
 [Dual Boot]: https://www.tecmint.com/install-ubuntu-alongside-with-windows-dual-boot/
 [WSL2]: https://learn.microsoft.com/en-us/windows/wsl/about
 [ChatGPT]: https://chat.openai.com/
+---

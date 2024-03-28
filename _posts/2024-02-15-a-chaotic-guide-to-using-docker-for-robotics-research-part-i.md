@@ -24,16 +24,19 @@ This article series delves into a new approach to using Docker. An approach that
 > **_NOTE:_**
 > Install Docker with [Easy Guide to Installing Docker].
 
+---
 ## Single Source of Information
 
 The main idea of this article is to create a Single Source of Information (SSI) for all the parameters and specifications for a robotics project. This idea helps to make sure that all the parameters required to setup a robot are referenced from and can be changed via a single file. This helps to maintain the complexity of a large robotics projects with several sub-modules. Further, these specifications generally includes weights and models that might not be be feasible to be used within a docker container. To this end, the single source of information must be place within a shared space between the docker and the main operating system. Such a space also is not allocated to the total usage space of docker when works at an advantage when the same weights have to be used in two container instances (say when comparing some changes to a module).
 
 The remainder of the article would then focus on this concept and explain in detail each component that would allow docker to be used in such a manner. See [Single Source of Truth - SSOT] for more information.
 
+---
 ## TL;DR
 
 If you just want to use docker, ROS and the [PHA Project] in the simplest way possible goto [TLDR; Docker Compose] for a quick usage of Docker.
 
+---
 ## Sample Container Usage
 
 Let's start with a sample usage of the concept, and then we can meticulously break it down piece by piece. For this purpose, we will use [PHA 22 Micro] which is an image specialized for this project. The details of this container are as follows:
@@ -391,6 +394,7 @@ docker run \
 
 The most important thing to note is that the folder `docker_share` is shared between the host and the docker containers. In the scope of this article, the folder is explicity ported to `/home/pha/docker_share` inside the docker container.
 
+---
 ## Structure of the SSI
 
 We can now disect the structure of the [SSI](#single-source-of-information). As we discussed earlier, the simplest form of SSI is just a folder that is mapped from the host to the containers. Now we will introduce some complexity into it to provide some struture to it and more stability when facing an even expanding project. This complexity (again) is just some folder spaces. Users are encouraged to create separate folders with clearly defining names when using the SSI. You can always create a new folder and write a short definition somewhere but if you have all the files in one place it will for sure get very confusing very soon. So within `docker_share` we have the following folders:
@@ -445,10 +449,12 @@ Once you have initialized the container with `docker run` you don't have to run 
 docker start pha-22-micro
 ```
 
+---
 ## Conclusion
 
 This article explains containerizing docker with a Single Source of Information (SSI) which serves as a base to fine tune the parameters for a robotics project. An extensive example of SSI will be introduced on a later article. This article is part of the [PHA Project] where different modules of the automated driving stack could be build upon. The next article set's up a docker image for a robotics project [[Chaotic Docker - Part II]].
 
+---
 ## Bibliography
 
 - [Docker ROS Guide]
@@ -494,3 +500,4 @@ This article explains containerizing docker with a Single Source of Information 
 [Why GPUs]: https://blogs.nvidia.com/blog/why-gpus-are-great-for-ai/
 [Realsense SDK Guide]: https://dev.intelrealsense.com/docs/compiling-librealsense-for-linux-ubuntu-guide
 [Shared Memory]: https://www.cyberciti.biz/tips/what-is-devshm-and-its-practical-usage.html
+---

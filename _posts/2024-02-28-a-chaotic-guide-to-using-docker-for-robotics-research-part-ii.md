@@ -19,10 +19,12 @@ tags:
 
 In this article we will learn how to create custom docker images for robotics, the PHA way. For this purpose [PHA Git] has a second folder named `envs`. This folder already contains some sample projects, each identified by a folder. We will understand in detail how [PHA 22 Mini] was created. The `Dockerfile` is available in [PHA Git] inside `envs/pha22-mini`.
 
+---
 ## Necessity
 
 So up until this point we have learned how to run a container with this method and that should have been it for the article. But, we still have to talk about some specialized features [PHA 22 Mini] has compared to other docker container. The most important being the fact that rather than running the system as root, the container runs as a user. This is an important step for us because if you make any changes as root, it would overwrite the permissions within the shared folder. This means that even for the host the ownership of the changed file or folder would pass to root. Generally this is not what we want in our system.
 
+---
 ## Sample Dockerfile
 
 Here is what we will do to re-create [PHA 22 Mini]:
@@ -281,6 +283,7 @@ The final step is to set the work directory to the home of the created user. Kee
 WORKDIR "/home/${NV_USERNAME}"
 ```
 
+---
 ## Create a Docker Image
 
 If you have not created the folder structure as explained in [Chaotic Docker - Part I - Finally, Space for the SSI], setup the folder structure before we create the container.
@@ -301,12 +304,14 @@ docker build -t phaenvs/pha-22:mini-sample -f envs/pha-22-mini/Dockerfile --no-c
 
 So we build our docker image by specifying the name with `-t, --tag` where `name:tag` is the convention. We specify the file with the `-f, --file` option. `--no-cache` option is used to remove the cache to reduce the size. When you are using a path to build an image then you use the `.`. 
 
+---
 ## Docker Hub
 
 Docker Hub is a cloud-based storage and sharing platform specifically designed for container images (*Powered by [Gemini][Gemini]*).
 
 Some samples of the images can be found in [phaenvs]. The definitions of the images are available in the [PHA Git Wiki - Images].
 
+---
 ## User from the Host Machine
 
 What we have learned till now generally works very well. But there are cases when docker permissions are associated to a particular user. This means in an Ubuntu system with several users, the current host is not the one to whon docker permissions are associated with. In such cases, to use the [SSI] we have to perform one additional step. This is to pass the user from the host machine to docker. 
@@ -361,10 +366,12 @@ WORKDIR "/home/${USERNAME}"
 
 We then create the new docker user with the user variable that were set in the previous section. This makes sure that our docker user and the host user have the same permission IDs. Finally, in our new image we set the new created user as the default and change the work directory to the home of this user. All this is documented well in [Set User Container Host].
 
+---
 ## Conclusion
 
 This article explains how a CUDA enabled image is created with the principles of the [PHA Project]. In the next article we will discuss some of the positives and negatives of this method and also provide a simpler application with `docker-compose` [[Chaotic Docker - Part III]].
 
+---
 ## Bibliography
 
 - [Docker ROS Guide]
@@ -400,3 +407,4 @@ This article explains how a CUDA enabled image is created with the principles of
 [ROS Humble]: https://docs.ros.org/en/humble/index.html
 [Colcon Quick Directory]: https://colcon.readthedocs.io/en/released/user/installation.html#quick-directory-changes
 [Set User Container Host]: https://www.baeldung.com/ops/docker-set-user-container-host
+---

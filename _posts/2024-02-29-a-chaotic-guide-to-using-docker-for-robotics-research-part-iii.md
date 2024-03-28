@@ -19,20 +19,24 @@ tags:
 
 This article is the conclusion to the Chaotic Docker Series, which creates a basis for the PHA Project. Further, it provides an easy way for applying the PHA way for people who do not want to spend a few days to understand Docker and want to directly use it.
 
+---
 ## Advantages
 
 The goal of Single Source of Information ([SSI]) is to provide a platform where different software packages can be used modularly in their dockerized forms for different systems. This means that it is a very flexible development platform that would be robust to changes that come during any development process. Another advantage of the SSI is that since this space is shared between the host and the container, no credentials have to be passed to the container. Any changes to the softwares can be made from the host system. Further, if any source installations are made on the SSI, then this does not associate to the size of the container.
 
+---
 ## Disadvantages
 
 The modularity based on several parameter definitions means the system would be very modular but it also increases the complexity of the project. Most of the modules would be dependant on several parameters that communicate very small details of the system. The biggest rebuttle about this article is that it opens access to several hardware resources of the host system that can make the system vurnerable. For this reason, the project is as of this point only ready for development, it is not production ready. However, with some security based decisions regading the access of the hardware resources, the system can be more secure.
 
 Another point to consider is that if there are several users setup in the host system, the permissions these users have regarding docker must be properly setup. Else the [SSI] folder might be owned by one user and Docker in general, regardless of which user has access, would be owned by one particular user. This is avoided by setting the host user in the docker container which is documented in 
 
+---
 ## Alternative
 
 One alternative to the docker ros robotics stack concept is [IKA ROS] and [IKA ROS ML]. They provide several different versions of ROS Docker and also provide several functions for installations. However, the author would argue (and of course the author tries to sell their idea), that with the SSI these installations could be easily applied to the container. This means that there are no issues with permissions when pulling or pushing with git, but again this project gives a lot of permissions to the containers. Further, if we install with one container, we can also use the software for a container created with the same image. But PHA would not be a consuptions project without look at alternatives without thinking about integrating them, this could be an idea for the future.
 
+---
 ## TL;DR Docker Compose
 
 This section would be short and sweet. If anyone wants more information, see [Docker Compose]. Compare between [Docker Run Options] and [Sample Docker Compose] to understand the commands used in a compose file.
@@ -105,6 +109,7 @@ docker start pha-22-mini
 
 Users can install their packages make changes in `/home/${USER}/schreibtisch/pha_docker_files/docker_share/git_pkgs`. This folder will not disappear if you wish to use docker like an acid bath technique and clear it out for a new fresh installation. It is hight recommended to use a version control system like git to maintain and save your work.
 
+---
 ## TL;DR PHA Scripts
 
 All these commands can be run with scripts available with [PHA Docker]. We will see some sample applications:
@@ -147,14 +152,17 @@ There is also a script to directly pass the user to a specified image:
 ./docker_scripts/run-compose.sh -e docker_scripts/compose-file-user.env -f docker_scripts/docker-compose-user.yaml
 ```
 
+---
 ## Full Usage
 
 Checkout [PHA Git Wiki - Usage] for the full options available for scripts.
 
+---
 ## Conclusion
 
 This article series creates a base platform for the [PHA Project] where different modules of the automated driving stack could be built upon. It gives an extensive guide to using docker and ends with a super short usage guide for docker.
 
+---
 ## Bibliography
 
 - [PHA 22 Mini]
@@ -179,3 +187,4 @@ This article series creates a base platform for the [PHA Project] where differen
 [IKA ROS ML]: https://github.com/ika-rwth-aachen/docker-ros-ml-images
 [IKA ROS]: https://github.com/ika-rwth-aachen/docker-ros
 [Docker Compose]: https://docs.docker.com/compose/
+---

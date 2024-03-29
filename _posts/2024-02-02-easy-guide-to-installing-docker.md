@@ -5,7 +5,7 @@ subtitle:   TL;DR copy paste the code ;)
 date:       2024-02-02
 author:     Shrijal Pradhan
 header-img: "img/pha-easy-docker.png"
-color-grad: 0.75
+color-grad: 0.7
 catalog: true
 categories: blog
 permalink: /:categories/:title/

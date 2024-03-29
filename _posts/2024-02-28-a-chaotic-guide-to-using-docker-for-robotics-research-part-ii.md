@@ -5,6 +5,7 @@ subtitle:   Creating a docker image, the PHA Way
 date:       2024-02-28
 author:     Shrijal Pradhan
 ext-img: "https://drscdn.500px.org/photo/1089309581/q%3D90_m%3D2048/v2?sig=0f169cfa209f8c9ff1a0495b1e2d44172a31283d79bcd8f327d2b59a57726557"
+color-grad: 0.7
 catalog: true
 categories: blog
 permalink: /:categories/:title/

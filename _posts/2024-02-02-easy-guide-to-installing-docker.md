@@ -113,6 +113,13 @@ sudo apt-get install -y nvidia-container-toolkit
    <figcaption>NVIDIA Container Toolkit (<a href="https://blog.roboflow.com/use-the-gpu-in-docker/">Citation</a>)</figcaption>
 </figure>
 
+Then configure docker:
+
+```bash
+sudo nvidia-ctk runtime configure --runtime=docker
+sudo systemctl restart docker
+```
+
 Once these installations are completed, we can start with docker containers. With the acception of sensor and ROS drivers; everything else required for the project can be installed within the containers.
 
 ---

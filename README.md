@@ -1,6 +1,6 @@
 # Shrijal's Blog
 
-This blog about my Work and Projects. Checkout [`[SP Blog]`](https://pradhanshrijal.github.io/).
+This blog is about my Work and Projects. Checkout [`[SP Blog]`](https://pradhanshrijal.github.io/).
 
 # Projects
 

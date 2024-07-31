@@ -10,6 +10,7 @@ categories: blog
 permalink: /:categories/:title/
 tags:
     - pha
+    - carla
     - docker
     - robotics
     - ros

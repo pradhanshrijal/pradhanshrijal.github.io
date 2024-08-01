@@ -154,6 +154,22 @@ Launch Carlaware.
 ```
 
 ---
+## Changing Carlaware Parameters
+
+Carlaware makes changing autoware parameters very simple. The default script referenced in the project is `${OP_BRIDGE_ROOT}/pha_scripts/export_carlaware_envs.sh`. As a sample, the user can change the perception parameters of autoware:
+
+```
+# Perception
+export CWR_PERCEPTION_MODE="camer_lidar_fusion"
+# camera_lidar_radar_fusion, camera_lidar_fusion, lidar_radar_fusion, lidar, radar
+export CWR_CENTERPOINT_MODEL="centerpoint_tiny"
+# `centerpoint`, `centerpoint_tiny` or `centerpoint_sigma`
+export CWR_CENTERPOINT_PATH="${CWR_DATA_PATH}/lidar_centerpoint"
+```
+
+The line blow each variable are the options that are available.
+
+---
 ## Bibliography
 
 - [ENV CWR]
